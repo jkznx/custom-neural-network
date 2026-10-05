@@ -210,6 +210,12 @@ RSS รวม Python, PyTorch, โหลด checkpoint, warmup, inference, image
 
 <!-- RESULTS_END -->
 
+## ลิงก์ GitHub สำหรับส่งงาน
+
+**Submission repository:** [https://github.com/jkznx/custom-neural-network](https://github.com/jkznx/custom-neural-network)
+
+ใช้ลิงก์ repository นี้สำหรับส่ง Assignment-10 โดยมีโค้ด, README, Mermaid architecture, checkpoint ที่เทรนแล้ว และผลการประเมินจริงครบใน repository
+
 ## ข้อจำกัดและการส่งงาน
 
 Input ขนาด 64×36 อาจทำให้ขอบเลนและพื้นที่แคบสูญหาย ผลคะแนนชุดนี้วัดที่ขนาด mask 64×36 จึงไม่ควรเทียบตรงกับคะแนนรอบเก่าที่วัดคนละ resolution และ split ผลรอบ 96×160 เดิมใน `runs/lane/` และ `run/test/` เป็นประวัติรอบก่อน ไม่ใช่ผลตามข้อกำหนดล่าสุด
