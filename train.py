@@ -1,4 +1,4 @@
-"""Train every layer from scratch using explicit train and validation splits."""
+"""Train from scratch on Train 65%; Test is never read during training."""
 import argparse
 import csv
 import time
@@ -35,11 +35,11 @@ def run_epoch(model, loader, device, optimizer=None):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--data-root', required=True)
-    p.add_argument('--output', default='runs/lane')
+    p.add_argument('--output', default='runs/lane64x36')
     p.add_argument('--epochs', type=int, default=30)
     p.add_argument('--batch-size', type=int, default=4)
-    p.add_argument('--height', type=int, default=96)
-    p.add_argument('--width', type=int, default=160)
+    p.add_argument('--height', type=int, default=36)
+    p.add_argument('--width', type=int, default=64)
     p.add_argument('--base', type=int, default=6)
     p.add_argument('--lr', type=float, default=.001)
     p.add_argument('--seed', type=int, default=42)
@@ -55,36 +55,33 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     if any(out.iterdir()):
         raise ValueError('Output must be empty; choose a fresh run directory')
-    datasets = [LaneDataset(root/'images'/split, root/'labels'/split, args.height, args.width, split=='train')
-                for split in ['train', 'val']]
-    if {p.name for p in datasets[0].images} & {p.name for p in datasets[1].images}:
-        raise ValueError('Duplicate train/val filenames')
-    write_json(out/'split_manifest.json', {s:[str(x.resolve()) for x in ds.images] for s,ds in zip(['train','val'],datasets)})
-    loaders = [DataLoader(ds, batch_size=args.batch_size, shuffle=i==0, num_workers=0,
-                         generator=torch.Generator().manual_seed(args.seed+i)) for i,ds in enumerate(datasets)]
+    dataset=LaneDataset(root/'images'/'train',root/'labels'/'train',args.height,args.width,True)
+    write_json(out/'split_manifest.json', {'train':[str(x.resolve()) for x in dataset.images]})
+    loader=DataLoader(dataset,batch_size=args.batch_size,shuffle=True,num_workers=0,
+                      generator=torch.Generator().manual_seed(args.seed))
     model = LaneNet(args.base).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=1e-4)
     write_json(out/'config.json', vars(args))
     write_json(out/'environment.json', {'torch':str(torch.__version__), 'device':str(device),
         'device_name':torch.cuda.get_device_name() if device.type=='cuda' else 'CPU',
         'parameters':sum(p.numel() for p in model.parameters())})
-    best, start = float('inf'), time.perf_counter()
+    start = time.perf_counter()
     with SummaryWriter(str(out/'tensorboard')) as writer, (out/'history.csv').open('w',newline='') as f:
         history = csv.writer(f)
-        history.writerow(['epoch','train_loss','val_loss','train_iou','val_iou','elapsed_seconds'])
+        history.writerow(['epoch','train_loss','train_iou','elapsed_seconds'])
         for epoch in range(1,args.epochs+1):
-            tl,ti = run_epoch(model,loaders[0],device,optimizer)
-            vl,vi = run_epoch(model,loaders[1],device)
+            tl,ti = run_epoch(model,loader,device,optimizer)
             elapsed = time.perf_counter()-start
-            history.writerow([epoch,tl,vl,ti,vi,elapsed]); f.flush()
-            for key,value in [('loss/train',tl),('loss/val',vl),('iou/train',ti),('iou/val',vi)]:
+            history.writerow([epoch,tl,ti,elapsed]); f.flush()
+            for key,value in [('loss/train',tl),('iou/train',ti)]:
                 writer.add_scalar(key,value,epoch)
             state = {'architecture':'LaneNet-v1','config':vars(args),'epoch':epoch,
-                     'val_loss':vl,'model_state':model.state_dict(),'optimizer_state':optimizer.state_dict()}
+                     'train_loss':tl,'selection':'final epoch, fixed before test',
+                     'model_state':model.state_dict(),'optimizer_state':optimizer.state_dict()}
             torch.save(state,out/'last.pt')
-            if vl<best:
-                best=vl; torch.save(state,out/'best.pt')
-            print(f'{epoch}/{args.epochs}: train loss {tl:.5f}; val loss {vl:.5f}; val IoU {vi:.4f}; elapsed {elapsed:.1f}s',flush=True)
+            print(f'{epoch}/{args.epochs}: train loss {tl:.5f}; train IoU {ti:.4f}; elapsed {elapsed:.1f}s',flush=True)
+    state.pop('optimizer_state')
+    torch.save(state,out/'model.pt')
     from report import plot_history
     plot_history(out/'history.csv',out/'loss.png')
 

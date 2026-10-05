@@ -56,7 +56,7 @@ def main():
     p.add_argument('--images-dir',required=True)
     p.add_argument('--labels-dir',help='Optional ground truth for snapshot only')
     p.add_argument('--checkpoint',required=True)
-    p.add_argument('--output',default='run/test')
+    p.add_argument('--output',default='run/test64x36')
     p.add_argument('--threshold',type=float,default=.5)
     p.add_argument('--threads',type=int,default=4)
     p.add_argument('--device',choices=['auto','cpu','cuda'],default='auto')
@@ -69,6 +69,7 @@ def main():
     if out.exists() and any(out.iterdir()):
         raise ValueError('Inference output must be empty')
     (out/'masks').mkdir(parents=True,exist_ok=True)
+    (out/'native_masks').mkdir(parents=True,exist_ok=True)
     device=get_device(args.device)
     if device.type=='cuda':
         torch.cuda.reset_peak_memory_stats(device)
@@ -95,8 +96,10 @@ def main():
                     torch.cuda.synchronize(device)
                 times.append((time.perf_counter()-start)*1000)
                 binary=(logits.sigmoid()[0,0].cpu().numpy()>args.threshold).astype(np.uint8)*255
-                mask=Image.fromarray(binary).resize(image.size,Image.Resampling.NEAREST)
-                mask.save(out/'masks'/(path.stem+'.png'))
+                small_mask=Image.fromarray(binary)
+                small_mask.save(out/'masks'/(path.stem+'.png'))
+                mask=small_mask.resize(image.size,Image.Resampling.NEAREST)
+                mask.save(out/'native_masks'/(path.stem+'.png'))
                 if i==0:
                     truth=native_mask(Path(args.labels_dir)/(path.stem+'.txt'),image.size) if args.labels_dir else None
                     snapshot(image,mask,truth,out/'snapshot.png')

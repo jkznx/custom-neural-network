@@ -1,69 +1,44 @@
-# PSU Reservoir — Custom Lane Segmentation from Scratch
+# Assignment-10 — Custom U-Net Lane Segmentation from Scratch
 
-โปรเจกต์ Assignment-10 สำหรับ binary semantic segmentation ของพื้นที่ `lane` ใน PSU-reservoir dataset ออกแบบโมเดลเองด้วย PyTorch และเริ่มเทรนทุก layer จาก random initialization ไม่มี pretrained backbone ไม่มีการ freeze layer ใช้เฉพาะ CVAT `<polygon label="lane">` รวม polygon ทุกชิ้นในภาพเป็น foreground เดียว
+สร้าง network **LaneNet-v1** แบบ residual U-Net สำหรับ single-class binary lane segmentation และเทรนใหม่ทุก layer บน PSU-reservoir Dataset-Assignment-8 ใช้เฉพาะ polygon label `lane` ไม่ใช้ bounding boxes, polylines, polygon `sideway` หรือ `track-line` มาสร้าง target ไม่มี pretrained weights และไม่มี frozen layers
 
-**ขอบเขต label:** ใน dataset นี้ `lane` เป็นพื้นที่เลนตาม polygon ไม่ใช่เส้นตีถนน `track-line` ส่วน `sideway` ถือเป็น background เช่นเดียวกับพื้นที่อื่น ๆ โดยไม่ใช้ polyline หรือ bounding box มาสร้าง target
+งานรอบนี้ดำเนินการตามข้อ 0–1.3 ซึ่งระบุ Custom U-Net แม้หัวเรื่องกล่าวถึง custom-YOLO-seg แต่รายการงานนี้ไม่ได้ระบุให้สร้าง/เทรน YOLO อีกโมเดล
 
-## โครงสร้างและเหตุผล
+## Input / output และโครงสร้างที่ออกแบบ
 
-โมเดล **LaneNet-v1** เป็น residual encoder-decoder รูปตัว U ที่เขียนขึ้นเองใน `model.py` มี encoder 3 ระดับและ bottleneck ใช้ channel 6 → 12 → 24 → 48 decoder ใช้ bilinear interpolation, concat skip features และ residual block ก่อน convolution 1×1 ที่ให้ logits หนึ่ง channel มี trainable parameters รวม **72,859 ตัว**
-
-แต่ละ residual block = Conv3×3 → GroupNorm(3 groups) → ReLU → Conv3×3 → GroupNorm บวก shortcut (identity หรือ Conv1×1 เมื่อจำนวน channel เปลี่ยน) แล้ว ReLU น้ำหนัก convolution ทุกชั้นเริ่มด้วย Kaiming random initialization และ trainable ทั้งหมด
-
-| Stage | Operation | Tensor shape (batch omitted) |
-|---|---|---|
-| Input | RGB / 255 | 3×96×160 |
-| E1 | Residual block | 6×96×160 |
-| E2 | MaxPool2 + residual block | 12×48×80 |
-| E3 | MaxPool2 + residual block | 24×24×40 |
-| Bottleneck | MaxPool2 + residual block | 48×12×20 |
-| D3 | Bilinear upsample + E3 concat + block | 24×24×40 |
-| D2 | Bilinear upsample + E2 concat + block | 12×48×80 |
-| D1 | Bilinear upsample + E1 concat + block | 6×96×160 |
-| Output | Conv1×1 | 1×96×160 logits |
-
-เหตุผลในการออกแบบ:
-
-- Channel น้อยและ downsample เพียง 3 ครั้ง ช่วยลด parameter และ activation memory เพื่อทดลองบน laptop/PC
-- Skip connections ส่งรายละเอียดขอบเลนให้ decoder และ residual connections ช่วยการไหลของ gradient เมื่อเริ่มเทรนจากศูนย์
-- GroupNorm ไม่อาศัยสถิติของ batch จึงเหมาะกับ batch 2–4
-- Bilinear upsampling ไม่มี parameter เพิ่มและหลีกเลี่ยงการใช้ transposed convolution ในขั้น upsample
-- Loss = 0.5 BCEWithLogits + 0.5 soft Dice เพื่อให้ทั้งการจำแนก pixel และพื้นที่ foreground มีส่วนใน optimization
-- ความละเอียด 96×160 เป็นค่าเริ่มต้นสำหรับการเทรนจริงบน CPU; อาจทำให้ขอบเลนละเอียดหรือพื้นที่แคบสูญหาย หากเครื่องมีทรัพยากรพอให้เพิ่มเป็น 192×320 และเทรนใหม่ ค่า 48×48 ในไฟล์แนบเป็นตัวอย่าง ไม่ใช่ข้อกำหนดใน brief
-
-แผนภาพเพิ่มเติมอยู่ใน [custom-unet-architecture.md](custom-unet-architecture.md)
+ใช้ convention **width × height × channels** ตามขนาดภาพ: input **64×36×3 RGB**, output **64×36×1 binary mask** ภายใน PyTorch คือ input N×3×36×64 และ logits N×1×36×64 ใช้ sigmoid > 0.5 เพื่อสร้าง binary mask 0/255 ทุก convolution เริ่มด้วย random Kaiming initialization
 
 ```mermaid
 flowchart TD
-    INPUT["RGB input<br/>3 x 96 x 160"]
+    INPUT["RGB input<br/>3 x 36 x 64"]
 
     subgraph ENC["Encoder"]
-        E1["Residual block: 3 to 6<br/>6 x 96 x 160"]
+        E1["Residual block: 3 to 6<br/>6 x 36 x 64"]
         P1["MaxPool 2 x 2"]
-        E2["Residual block: 6 to 12<br/>12 x 48 x 80"]
+        E2["Residual block: 6 to 12<br/>12 x 18 x 32"]
         P2["MaxPool 2 x 2"]
-        E3["Residual block: 12 to 24<br/>24 x 24 x 40"]
+        E3["Residual block: 12 to 24<br/>24 x 9 x 16"]
         P3["MaxPool 2 x 2"]
         E1 --> P1 --> E2 --> P2 --> E3 --> P3
     end
 
-    BRIDGE["Bottleneck residual block: 24 to 48<br/>48 x 12 x 20"]
+    BRIDGE["Bottleneck residual block: 24 to 48<br/>48 x 4 x 8"]
 
     subgraph DEC["Decoder"]
-        U3["Bilinear upsample<br/>48 x 24 x 40"]
-        C3["Concat with E3<br/>72 x 24 x 40"]
-        D3["Residual block: 72 to 24<br/>24 x 24 x 40"]
-        U2["Bilinear upsample<br/>24 x 48 x 80"]
-        C2["Concat with E2<br/>36 x 48 x 80"]
-        D2["Residual block: 36 to 12<br/>12 x 48 x 80"]
-        U1["Bilinear upsample<br/>12 x 96 x 160"]
-        C1["Concat with E1<br/>18 x 96 x 160"]
-        D1["Residual block: 18 to 6<br/>6 x 96 x 160"]
+        U3["Bilinear upsample<br/>48 x 9 x 16"]
+        C3["Concat with E3<br/>72 x 9 x 16"]
+        D3["Residual block: 72 to 24<br/>24 x 9 x 16"]
+        U2["Bilinear upsample<br/>24 x 18 x 32"]
+        C2["Concat with E2<br/>36 x 18 x 32"]
+        D2["Residual block: 36 to 12<br/>12 x 18 x 32"]
+        U1["Bilinear upsample<br/>12 x 36 x 64"]
+        C1["Concat with E1<br/>18 x 36 x 64"]
+        D1["Residual block: 18 to 6<br/>6 x 36 x 64"]
         U3 --> C3 --> D3 --> U2 --> C2 --> D2 --> U1 --> C1 --> D1
     end
 
-    HEAD["Conv 1 x 1: 6 to 1<br/>Logits: 1 x 96 x 160"]
-    MASK["Sigmoid, then threshold greater than 0.5<br/>Binary lane mask: 96 x 160"]
+    HEAD["Conv 1 x 1: 6 to 1<br/>Logits: 1 x 36 x 64"]
+    MASK["Sigmoid, then threshold greater than 0.5<br/>Binary lane mask: 36 x 64"]
     NATIVE["Nearest-neighbor resize<br/>Mask at original image resolution"]
 
     INPUT --> E1
@@ -74,168 +49,176 @@ flowchart TD
     D1 --> HEAD --> MASK --> NATIVE
 ```
 
-## Dataset และการป้องกัน data leakage
+| Stage | Output C×H×W |
+|---|---|
+| RGB input | 3×36×64 |
+| Encoder 1 | 6×36×64 |
+| Encoder 2 | 12×18×32 |
+| Encoder 3 | 24×9×16 |
+| Bottleneck | 48×4×8 |
+| Decoder 3 | 24×9×16 |
+| Decoder 2 | 12×18×32 |
+| Decoder 1 | 6×36×64 |
+| Conv1×1 logits | 1×36×64 |
 
-ต้นฉบับคือ `Dataset-Assignment-8` ของผู้ใช้ มี CVAT image XML, ภาพใน subfolders และ ZIP ภาพ 400 รูป `prepare_data.py` อ่านเฉพาะ polygon label `lane` แปลงเป็น YOLO-seg class 0 ที่มี normalized coordinates แล้วคัดลอกภาพเข้า working directory ใหม่ ไม่แก้ต้นฉบับ
+แต่ละ residual block = Conv3×3 → GroupNorm(3 groups) → ReLU → Conv3×3 → GroupNorm + shortcut → ReLU Shortcut เป็น identity เมื่อ channel เท่ากัน หรือ Conv1×1 เมื่อเปลี่ยน channel ทั้ง network มี **72,859 parameters**
 
-ผลการตรวจและ split ของข้อมูลที่มีจริง:
+เหตุผลในการออกแบบ:
 
-| Set | Images | การใช้ |
-|---|---:|---|
-| Train | 528 | Optimization และ augmentation |
-| Validation | 100 | Frames 1103–1202; เลือก checkpoint จาก loss ต่ำสุด |
-| Excluded temporal gap | 20 | Frames 1083–1102; ไม่ใช้เทรน/ประเมิน |
-| Test | 400 | Test เดิม frames 2–401; ใช้หลังจบการเทรน |
+- Channel 6/12/24/48 และ encoder 3 ระดับช่วยจำกัดจำนวน parameter และ activation memory สำหรับ laptop/PC
+- U-Net skip connections นำรายละเอียด spatial กลับไปยัง decoder เพื่อแบ่งขอบพื้นที่เลน
+- Residual connections ช่วย gradient ไหลระหว่างการเทรนจากศูนย์
+- GroupNorm เหมาะกับ batch เล็กเพราะไม่ใช้ batch statistics
+- Bilinear upsampling ไม่มี parameter เพิ่ม และ resize ตามขนาด skip โดยตรงเพื่อรองรับความสูง 9→4 ที่ max-pool
+- Loss = 0.5 BCEWithLogits + 0.5 soft Dice รวมการจำแนก pixel กับความทับซ้อนของ foreground
 
-XML ในช่วง 450–499 และ 600–649 อ้างถึงภาพรวม 100 รูปที่ไม่พบในชุดข้อมูลที่ให้มา จึงบันทึกไว้ใน `data/manifest.json` และไม่นำมาเทรน ภาพซ้ำจาก Train ที่ตรงกับ Test 2 รูปถูกตัดออกตาม SHA-256 ของไฟล์ภาพ คง Test ไว้ทุกภาพ ใช้ validation ช่วงต่อเนื่องแทนการสุ่มเฟรมใกล้กัน ผลตรวจยังไม่สามารถยืนยันความเป็นอิสระของวิดีโอต้นทางหรือ near-duplicate ที่ไฟล์ต่างกันได้ จึงควรตีความผลเป็นผลบนเส้นทาง/ชุดข้อมูลนี้ และเพิ่มข้อมูลคนละการถ่ายหากต้องการวัด generalization
+ดู Mermaid ของ network และภายใน residual block ใน [custom-unet-architecture.md](custom-unet-architecture.md)
 
-สำเนา manifest สำหรับแพ็กส่งอยู่ใน [dataset_manifest.json](dataset_manifest.json) มีรายชื่อภาพที่ใช้ ภาพหาย ภาพซ้ำที่ถูกตัดออก และ SHA-256 ของภาพต้นฉบับ
+## Dataset: Train 65% / Test 35%
+
+นำภาพที่มีจริงจาก Train และ Test เดิมมารวมกัน ตรวจภาพซ้ำด้วย SHA-256 แล้วเรียงตามหมายเลข frame เพื่อแบ่งใหม่ตามข้อกำหนดล่าสุด ไม่สุ่มเฟรมใกล้กันข้ามชุด
+
+| Split | จำนวนภาพ | สัดส่วนจริง | การใช้ |
+|---|---:|---:|---|
+| Train | 681 | 64.98% | ใช้เทรนทุก epoch |
+| Test | 367 | 35.02% | ใช้ประเมินหลังเทรนจบเท่านั้น |
+| รวม | 1,048 | 100% | ภาพที่มีจริงและไม่ซ้ำ |
+
+สัดส่วนคลาดจาก 65/35 เล็กน้อยเพราะจำนวนภาพต้องเป็นจำนวนเต็ม Train จบที่ frame 835 และ Test เริ่ม frame 836 ไม่มี validation แยก ไม่มี temporal gap และเลือก final checkpoint หลังครบ 30 epochs โดยไม่ใช้คะแนน Test
+
+พบ XML อ้างถึงภาพที่ไม่มีไฟล์จริง 100 ภาพ (ช่วง 450–499 และ 600–649) และภาพซ้ำ 2 ภาพ จึงตัดออกพร้อม audit log ใน [dataset_manifest.json](dataset_manifest.json) ใช้เฉพาะข้อมูลที่มีจริง ผลนี้ยังอาจสัมพันธ์กันจากวิดีโอหรือเส้นทางเดียวกัน และไม่ยืนยัน generalization ไปยังการถ่ายครั้งอื่น
+
+### รูปแบบ Ultralytics YOLO-seg polygon
 
 ```text
-data/
-  images/{train,val,test}/*.jpg
-  labels/{train,val,test}/*.txt
+data65/
+  images/train/*.jpg
+  images/test/*.jpg
+  labels/train/*.txt
+  labels/test/*.txt
   manifest.json
 ```
 
-Label 1 บรรทัดต่อ polygon: `0 x1 y1 x2 y2 ... xn yn` ต้องมีอย่างน้อย 3 vertices ใน [0,1] Rasterize ที่ความละเอียดภาพต้นฉบับก่อน resize mask แบบ nearest-neighbor ใช้การวาดแต่ละ polygon เป็น union เพื่อไม่ให้พื้นที่ซ้อนกลายเป็นรู ไฟล์ annotation ที่หายถือเป็น error; ภาพ negative ต้องมีไฟล์ label ว่าง รองรับภาพขนาดต่างกัน Polylines ในรูปแบบ YOLO txt ไม่สามารถแยกจาก polygon ได้ด้วย syntax เพียงอย่างเดียว จึงต้อง export เฉพาะ polygon จากต้นทาง; ตัวแปลง CVAT ในโปรเจกต์นี้เลือกชนิดข้อมูลอย่างชัดเจน
+หนึ่งบรรทัดต่อ polygon: `0 x1 y1 x2 y2 ... xn yn` มีอย่างน้อย 3 vertices และ normalized coordinates [0,1] Lane หลาย polygon รวมเป็น foreground class เดียว Rasterize mask ที่ขนาดต้นฉบับก่อน resize mask ด้วย nearest-neighbor และ resize RGB ด้วย bilinear รองรับภาพต้นฉบับหลายขนาด
 
-## ติดตั้งและรัน
+Annotation ต้นฉบับของผู้ใช้เป็น CVAT XML ตัวแปลง `prepare_data.py` จึงเลือก `<polygon label="lane">` แล้ว export เป็น YOLO-seg ก่อนเทรน Syntax ของ YOLO txt เพียงอย่างเดียวแยก polyline ที่ export ผิดจาก polygon ไม่ได้ จึงต้องเลือกชนิดข้อมูลจากต้นทาง ไฟล์ label หายหรือ polygon ผิดรูปแบบถือเป็น error ภาพ negative ต้องมี label file ว่าง
 
-ต้องมี Python 3.10+ (การรันที่ส่งใช้ Python 3.12) เปิด terminal ในโฟลเดอร์ repo บน Windows:
+## ติดตั้ง
+
+ใช้ Python 3.10+; การรันจริงใช้ Python 3.12 บน Windows เปิด terminal ใน repo:
 
 ```powershell
 py -m venv .venv
 .venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-```
-
-สำหรับ CPU สามารถติดตั้ง torch จาก CPU index ก่อน:
-
-```powershell
 python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
 python -m pip install -r requirements.txt
 ```
 
-ไฟล์ `requirements-lock.txt` บันทึกเวอร์ชันจากการรันจริง การติดตั้ง CUDA ต้องเลือก PyTorch build ที่เข้ากับเครื่อง จากนั้นใช้ `--device cuda` แทน `cpu`
+`requirements-lock.txt` บันทึกเวอร์ชันที่รันจริง ถ้าใช้ GPU ให้ติดตั้ง PyTorch build ที่เหมาะกับเครื่องและเลือก --device cuda
 
-### 1. เตรียมข้อมูล
+## คำสั่งรันซ้ำ
+
+Output directories ต้องว่างเพื่อไม่ให้ผลเก่าปะปน หากรันใหม่ให้ใช้ชื่อ output ใหม่
+
+### 1. เตรียมข้อมูลจาก CVAT เป็น YOLO-seg
 
 ```powershell
-python prepare_data.py --source "C:\Users\ACER\Desktop\1-2569\353-Ecosystem\P_RATTACHAI\Dataset-Assignment-8" --output data --archive-cache archive-cache --skip-missing
+python prepare_data.py --source "C:\Users\ACER\Desktop\1-2569\353-Ecosystem\P_RATTACHAI\Dataset-Assignment-8" --output data65 --train-ratio 0.65 --archive-cache archive-cache --skip-missing
 ```
 
-`--skip-missing` เป็นการเลือกตัดภาพที่ไม่มีต้นฉบับออกโดยมี audit log หากไม่ระบุ flag นี้ script จะหยุดเมื่อพบภาพหาย ตั้งค่า validation และ temporal gap ได้ด้วย `--val-count` และ `--gap` Output ต้องว่างเพื่อไม่ให้ข้อมูลรันเก่าปะปน
+เปลี่ยน source เป็น path dataset ของเครื่องที่จะรัน `--skip-missing` ยืนยันการข้ามภาพที่ขาดพร้อมบันทึกใน manifest ถ้าไม่ระบุจะหยุดเมื่อพบภาพหาย
 
-### 2. เทรนทุก layer ใหม่
+### 2. Train from scratch 30 epochs
 
 ```powershell
-python train.py --data-root data --output runs/lane --epochs 30 --batch-size 4 --height 96 --width 160 --base 6 --threads 4 --device cpu
-tensorboard --logdir runs/lane/tensorboard
+python train.py --data-root data65 --output runs/lane64x36 --epochs 30 --batch-size 4 --width 64 --height 36 --base 6 --threads 4 --device cpu
+tensorboard --logdir runs/lane64x36/tensorboard
 ```
 
-ใช้ AdamW (lr 0.001, weight decay 0.0001), seed 42, batch 4, float32 ไม่โหลด weights ใดก่อนเทรน Augmentation ใช้เฉพาะ Train: white balance ±6%, brightness ±15/255 และ Gaussian blur เล็กน้อย Validation/Test ไม่ augment จัดเก็บ image/mask ที่ resize แล้วใน RAM เป็น uint8 เพื่อไม่ถอดรหัสภาพซ้ำทุก epoch; cache เป็นส่วนของ training memory ไม่ใช่ inference
+ใช้ AdamW, lr 0.001, weight decay 0.0001, seed 42, float32, batch 4 (ลดเป็น 2 ได้) ทุก layer รับ gradient และไม่โหลด checkpoint ก่อนเทรน Cache ภาพ/target ขนาด network ใน RAM เป็น uint8 เฉพาะ training เท่านั้น เก็บ `history.csv`, `loss.png`, TensorBoard scalars `loss/train` และ `iou/train`, config, environment, split manifest และ **model.pt จาก epoch 30**
 
-Artifacts: `best.pt` (validation loss ต่ำสุด), `last.pt`, `history.csv`, `loss.png`, `config.json`, `environment.json`, TensorBoard และ split manifest ไม่เลือก threshold จาก Test ใช้ sigmoid > 0.5 คงที่ เริ่ม run ใหม่ด้วย `--output` ชื่อใหม่
+Augmentation เฉพาะ Train: random white balance gain 0.94–1.06, brightness shift ±15/255 และ Gaussian blur sigma 0.1–0.6 เล็กน้อย Test ไม่ augment
 
-### 3. Inference พร้อมวัด memory
+### 3. Inference: binary masks ใต้ run/
 
 ```powershell
-python inference.py --images-dir data/images/test --labels-dir data/labels/test --checkpoint runs/lane/best.pt --output run/test --threads 4 --device cpu
+python inference.py --images-dir data65/images/test --labels-dir data65/labels/test --checkpoint runs/lane64x36/model.pt --output run/test64x36 --threads 4 --device cpu
 ```
 
-ขนาด input และ base channels อ่านจาก checkpoint โดยตรง Output เป็น PNG binary mask 0/255 ที่ความละเอียดภาพเดิมใน `run/test/masks/` พร้อม `snapshot.png`, `predictions.json`, `memory.json` มี warmup 5 ครั้งก่อนวัด forward latency ใช้ `torch.inference_mode()` และ batch 1 ค่า memory แยก parameter bytes, process RSS และ CUDA peak allocated/reserved (เมื่อใช้ CUDA) จากกัน Model parameter MiB ไม่ใช่ memory footprint ทั้ง process
+ขนาด input อ่านจาก checkpoint ไฟล์ PNG binary masks ขนาด **64×36** อยู่ใน `run/test64x36/masks/` และสำเนาขนาดภาพเดิมใน `native_masks/` พร้อม snapshot และ memory report ใช้ batch 1 กับ inference_mode
 
-### 4. ประเมินผลและอัปเดต README
+### 4. Evaluation และรายงาน
 
 ```powershell
-python evaluate.py --images-dir data/images/test --labels-dir data/labels/test --pred-masks-dir run/test/masks --output run/test/metrics.json
-python report.py --run runs/lane --evaluation run/test/metrics.json --memory run/test/memory.json
+python evaluation.py --images-dir data65/images/test --labels-dir data65/labels/test --pred-masks-dir run/test64x36/masks --width 64 --height 36 --output run/test64x36/metrics.json
+python report.py --run runs/lane64x36 --evaluation run/test64x36/metrics.json --memory run/test64x36/memory.json
 python -m unittest discover -s tests -v
 ```
 
-IoU = TP/(TP+FP+FN), Dice = 2TP/(2TP+FP+FN), precision = TP/(TP+FP), recall = TP/(TP+FN) รายงานทั้ง global pixel metrics และ mean per-image IoU เพื่อให้เห็นวิธีเฉลี่ยที่ต่างกัน Pixel accuracy มีใน JSON แต่ background มากอาจทำให้ค่านี้สูงโดยโมเดลไม่ได้แบ่งเลนดี
+`evaluation.py` เรียก implementation ใน `evaluate.py` คำนวณ pixel-wise IoU = TP/(TP+FP+FN) ที่ขนาด 64×36 โดยไม่ใช้ภาพ native_masks ในการให้คะแนน นิยาม detected เป็น Yes เมื่อ GT มี lane และ **IoU > 0.6** (ค่าเท่ากับ 0.6 ไม่ผ่าน) Average IoU detected เฉลี่ยเฉพาะภาพ Yes หากไม่มีภาพผ่านให้ค่า null ทั้ง mask/GT ว่างให้ IoU 1 แต่ไม่นับเป็น lane detection Prediction ที่หาย ขนาดผิด หรือไม่ใช่ 0/255 จะหยุดด้วย error เพื่อไม่ละเว้น Test บางภาพโดยเงียบ
 
-นิยามเพิ่มเติมตามตัวอย่างแนบ: ภาพที่มี GT lane และ IoU **มากกว่า** 0.6 ถือว่า detected; detection rate หารด้วยจำนวนภาพที่มี lane; average IoU detected เฉลี่ยเฉพาะกลุ่มนี้ ไม่ใช้ค่านี้เป็นหลักเพราะไม่นับภาพที่โมเดลทำได้ไม่ดี เมื่อทั้ง prediction/GT ว่างให้ IoU = 1 แต่ไม่นับเป็น lane detection เมื่อไม่มี detected image ให้ค่าเฉลี่ยเป็น null Script จะหยุดเมื่อ prediction หาย ขนาดผิด หรือไม่ใช่ binary เพื่อไม่รายงานผลจาก test subset โดยไม่ตั้งใจ
-
-## ผลการเทรนและประเมินจริง
+## ผลการรันจริงตามข้อกำหนดล่าสุด
 
 <!-- RESULTS_START -->
-ผลต่อไปนี้มาจากการเทรนและ inference จริงของ **LaneNet-v1** บน PSU-reservoir dataset ที่ระบุไว้ด้านบน ใช้ CPU, float32, input 96×160, seed 42 และเทรนทุก layer ใหม่ทั้งหมดเป็นเวลา 30 epochs เลือก `runs/lane/best.pt` จาก validation loss ต่ำสุดที่ **epoch 20** โดยไม่ใช้ Test ในการเลือก checkpoint หรือ threshold
-
 ### กราฟ loss และการลู่เข้า
 
-![กราฟ train/validation loss และ IoU ระหว่างการเทรน](runs/lane/loss.png)
+![Training loss and IoU](runs/lane64x36/loss.png)
 
-| จุดของการเทรน | Train loss | Validation loss |
-|---|---:|---:|
-| Epoch 1 | 0.153356 | 0.070987 |
-| Best checkpoint: epoch 20 | 0.030250 | 0.032979 |
-| Epoch 30 | 0.022217 | 0.040079 |
+เทรนจริง 30 epochs บน CPU, batch 4, float32, seed 42 ค่า train loss ลดจาก **0.120468** เป็น **0.012987** เวลา epoch loop **76.1 วินาที** บันทึกทุก epoch ใน [history.csv](runs/lane64x36/history.csv)
 
-Loss ที่แสดงคือ 0.5 BCEWithLogits + 0.5 soft Dice กราฟด้านซ้ายแสดงว่า train loss ลดลง และ validation loss ลดลงในช่วงแรกก่อนแกว่งตัวใกล้ช่วงต่ำสุด กราฟด้านขวาแสดง global lane IoU ที่ความละเอียดของ network การเทรนต่อหลัง epoch 20 ทำให้ train loss ลดลง แต่ validation loss ไม่ดีขึ้นอย่างสม่ำเสมอ จึงรายงานผล Test ด้วย best checkpoint แทน epoch สุดท้าย
+กราฟนี้เป็น training loss การรันนี้ใช้ Train 65% ทั้งหมดและ Test 35% ไม่มี validation split แยก เลือก checkpoint epoch 30 ซึ่งเป็น epoch สุดท้ายตามที่กำหนดก่อนเทรน ไม่ใช้ Test เลือก checkpoint หรือ threshold การลดลงของ training loss แสดงการเรียนรู้ชุด Train; ประสิทธิภาพกับข้อมูลที่ไม่ได้ใช้เทรนดูจาก Test ด้านล่าง
 
-เวลาเทรนเฉพาะ epoch loop: **245.4 วินาที** ข้อมูลทุก epoch อยู่ใน [history.csv](runs/lane/history.csv) และกราฟสร้างจากไฟล์นี้
+### ค่าประสิทธิภาพของโมเดล
 
-### ค่าการวัดผลประสิทธิภาพ
-
-ประเมิน Test **400 ภาพ** ที่ความละเอียดต้นฉบับ 1280×720 โดยนำ mask ขนาด 96×160 กลับไปขนาดภาพเดิมด้วย nearest-neighbor และใช้ sigmoid > 0.5 เป็น foreground
+ประเมิน binary masks ที่ความละเอียด **width 64 × height 36** โดย rasterize GT polygon ที่ขนาดต้นฉบับก่อน resize ด้วย nearest-neighbor ใช้ sigmoid > 0.5 เป็น lane
 
 | Metric | ผลจริง |
 |---|---:|
-| Global lane IoU | 0.933014 (93.30%) |
-| Global Dice / F1 | 0.965347 (96.53%) |
-| Pixel precision | 0.965736 |
-| Pixel recall | 0.964957 |
-| Pixel accuracy | 0.964970 |
-| Mean per-image IoU | 0.933073 |
-| ภาพที่มี lane และ IoU > 0.6 | 400 / 400 |
-| Detection rate ตามเกณฑ์ IoU > 0.6 | 100.00% |
-| Average IoU เฉพาะภาพที่ detected | 0.933073 |
+| Test images | 367 |
+| Global pixel-wise lane IoU | 0.828676 |
+| Mean per-image IoU | 0.828612 |
+| Dice / F1 | 0.906313 |
+| Precision | 0.864659 |
+| Recall | 0.952183 |
+| Detected: GT lane and IoU > 0.6 | 367 / 367 |
+| Detection rate | 100.00% |
+| Average IoU of detected results | 0.828612 |
 
-Global IoU คำนวณจาก TP/FP/FN รวมทุกภาพ ส่วน mean per-image IoU คำนวณ IoU ของแต่ละภาพแล้วเฉลี่ย ค่าจึงอาจต่างกัน คะแนน detection rate 100% หมายถึงทุกภาพผ่านเกณฑ์ IoU > 0.6 ไม่ได้หมายถึงทุก pixel ถูกต้อง รายละเอียดคะแนนรายภาพและ confusion counts อยู่ใน [metrics.json](run/test/metrics.json)
+ผล Yes/No และคะแนน IoU รายภาพอยู่ใน [metrics.json](run/test64x36/metrics.json) Detection rate คือการผ่านเกณฑ์ IoU > 0.6 ไม่ใช่ความถูกต้องทุก pixel Global IoU รวม TP/FP/FN ทุกภาพ ส่วน mean per-image IoU เฉลี่ยรายภาพ
 
 ### ตัวอย่างก่อนและหลัง inference
 
-![ก่อน inference, binary lane mask, prediction overlay และ ground truth](run/test/snapshot.png)
+![Original, predicted mask, overlay and polygon ground truth](run/test64x36/snapshot.png)
 
-ภาพตัวอย่าง `frame_0002_f52.jpg` แสดง 4 ช่องจากซ้ายไปขวา:
+ภาพ `frame_0836_f21681.jpg` เป็นภาพแรกตามชื่อไฟล์ที่เลือกก่อนคำนวณคะแนน จากซ้าย: RGB ต้นฉบับ, binary lane mask, overlay สีเขียวหลัง inference และ GT จาก polygon lane ภาพแสดงผลขยายกลับขนาดเดิมเพื่อดูง่าย ไฟล์ผลหลักใน masks/ มีขนาด 64×36 และมี native_masks/ สำหรับภาพขนาดเดิม
 
-1. **ก่อน inference:** ภาพ RGB ต้นฉบับ
-2. **หลัง inference:** binary mask ที่โมเดลทำนาย โดยสีขาวคือ lane และสีดำคือ background
-3. **Prediction overlay:** พื้นที่สีเขียวคือ lane ที่ทำนาย ซ้อนบนภาพต้นฉบับ
-4. **Ground truth:** mask ที่สร้างจาก polygon label `lane` เท่านั้น
+### Memory footprint ที่วัดจริงระหว่าง inference
 
-เลือกภาพแรกตามชื่อไฟล์ก่อนคำนวณคะแนน ไม่ได้เลือกภาพที่มีคะแนนสูงสุด จากภาพยังเห็นความคลาดเคลื่อนบริเวณขอบและแถบกึ่งกลางเลน ซึ่งสอดคล้องกับข้อจำกัดของ input ความละเอียดต่ำ ภาพนี้แสดงการแบ่งพื้นที่เลนตาม annotation ไม่ใช่การตรวจเส้นตีถนน
+ระบบ **Windows-11-10.0.26300-SP0**, PyTorch **2.14.1+cpu**, CPU **Intel64 Family 6 Model 186 Stepping 2, GenuineIntel**, 4 threads, batch 1, float32, input width 64 × height 36 ใช้ inference_mode และ warmup 5 ครั้ง
 
-### Memory footprint ที่ใช้ในการ inference
+| รายการ | ค่าที่วัดได้ |
+|---|---:|
+| Parameters | 72,859 |
+| FP32 model parameters + buffers | 0.2779 MiB |
+| Baseline RSS ก่อนโหลดโมเดล | 197.61 MiB |
+| Sampled peak process RSS | 243.13 MiB |
+| Peak RSS increase over baseline | 45.52 MiB |
+| Windows lifetime peak working set | 248.23 MiB |
+| Mean forward latency หลัง warmup | 1.97 ms/image |
 
-วัดจริงบน **Windows-11-10.0.26300-SP0**, PyTorch **2.14.1+cpu**, CPU **Intel64 Family 6 Model 186 Stepping 2, GenuineIntel**, 4 threads, input **96×160**, float32, **batch size 1** ใช้ `torch.inference_mode()` และ warmup 5 ครั้ง
-
-| รายการ | ค่าที่วัดได้ | ความหมาย |
-|---|---:|---|
-| Trainable parameters | 72,859 | จำนวน parameter ของโมเดล |
-| FP32 parameters + buffers | 0.2779 MiB | ขนาด tensor ของโมเดล ไม่รวม runtime และ activations |
-| Process RSS ก่อนโหลดโมเดล | 197.57 MiB | Baseline หลัง import libraries |
-| Sampled peak process RSS | 246.82 MiB | Peak ระหว่างโหลดโมเดลและ inference pipeline |
-| Peak RSS ที่เพิ่มจาก baseline | 49.25 MiB | Sampled peak ลบ baseline |
-| Windows peak working set ตลอดอายุ process | 252.76 MiB | OS-reported peak รวมช่วงเริ่มโปรแกรม |
-| Mean forward latency หลัง warmup | 5.57 ms/image | เฉพาะ forward pass |
-
-Memory footprint ของทั้ง process ในการรันนี้อยู่ประมาณ **252.76 MiB** ตาม Windows peak working set ไม่ใช่เพียงขนาด parameter 0.2779 MiB ค่านี้รวม Python, PyTorch และ buffer ประมวลผลภาพด้วย จึงเป็นหลักฐานว่า inference รันได้บนเครื่อง local ที่ใช้ทดสอบ โดย memory อาจต่างกันเมื่อเปลี่ยนระบบ ขนาดภาพ หรือ batch size
-
-Sampled RSS อ่านทุก 10 ms ตั้งแต่ก่อนโหลดโมเดล ครอบคลุมการโหลด checkpoint, warmup, inference ทั้ง 400 ภาพ, การถอดรหัสภาพ, export masks และสร้าง snapshot การ sampling อาจพลาด peak ที่สั้นมาก จึงรายงาน Windows lifetime peak แยกด้วย ส่วน forward latency ไม่รวมการอ่านภาพ, preprocessing, sigmoid, resize และบันทึกไฟล์ การรันนี้ใช้ CPU จึงไม่มีค่า CUDA VRAM รายละเอียดอยู่ใน [memory.json](run/test/memory.json)
-
-### ข้อจำกัดในการตีความผล
-
-ทั้ง 400 ภาพ Test มี lane จึงยังไม่มีผลทดสอบภาพที่ไม่มี lane และเป็นข้อมูลจากเส้นทาง/ชุดข้อมูลที่ให้มา คะแนนนี้ยังไม่ยืนยันประสิทธิภาพบนสถานที่ สภาพแสง หรือวิดีโอการถ่ายอื่น ขนาด input 96×160 ช่วยให้ใช้ทรัพยากรน้อย แต่ทำให้รายละเอียดขอบและพื้นที่แคบสูญหายได้
+RSS รวม Python, PyTorch, โหลด checkpoint, warmup, inference, image buffers, mask export และ snapshot อ่านทุก 10 ms จึงอาจพลาด peak สั้น ๆ Windows lifetime peak working set เป็นค่า OS ตลอด process รวมช่วงเริ่มโปรแกรมด้วย ขนาด parameter อย่างเดียวไม่ใช่ inference memory ทั้ง process ค่า latency วัดเฉพาะ forward ไม่รวม decode, preprocessing, sigmoid, resize และบันทึกไฟล์ การรันบน CPU จึงไม่มีค่า CUDA VRAM รายละเอียดใน [memory.json](run/test64x36/memory.json)
 
 <!-- RESULTS_END -->
 
-## ไฟล์สำหรับส่งงาน
+## ข้อจำกัดและการส่งงาน
 
-แนบ repo นี้พร้อม README, model.py, dataset.py, prepare_data.py, train.py, inference.py, evaluate.py, common.py, report.py, requirements, tests, `runs/lane/best.pt`, history, กราฟ loss และ `run/test/{metrics.json,memory.json,snapshot.png,predictions.json}` สามารถอัปโหลด ZIP หรือ repo ไป GitHub/PSU storage เพื่อส่ง URL ได้ ภาพ dataset และ prediction masks จำนวนมากไม่จำเป็นต้องอยู่ใน Git แต่ควรเก็บ manifest และระบุที่มาข้อมูลให้ผู้ตรวจรันซ้ำได้ ห้ามอ้างกราฟ/metrics จาก run อื่นเป็นผลของ checkpoint นี้
+Input ขนาด 64×36 อาจทำให้ขอบเลนและพื้นที่แคบสูญหาย ผลคะแนนชุดนี้วัดที่ขนาด mask 64×36 จึงไม่ควรเทียบตรงกับคะแนนรอบเก่าที่วัดคนละ resolution และ split ผลรอบ 96×160 เดิมใน `runs/lane/` และ `run/test/` เป็นประวัติรอบก่อน ไม่ใช่ผลตามข้อกำหนดล่าสุด
+
+ส่ง repo พร้อม README, Mermaid architecture, scripts, requirements, tests, dataset_manifest.json, `runs/lane64x36/model.pt`, history/กราฟ loss และ `run/test64x36/{metrics.json,memory.json,snapshot.png,predictions.json}` Dataset และ prediction masks จำนวนมากเก็บใน working directory local และถูก gitignore สามารถเตรียมใหม่จาก dataset ต้นทางได้
 
 ## ตัวอย่างงานที่เกี่ยวข้อง
 
-ตัวอย่างที่ผู้สอนให้ศึกษาประกอบ: [Ultrafast Lane Detection](https://github.com/ibaiGorordo/Ultrafast-Lane-Detection-Inference-Pytorch-) และ [YOLOTL](https://github.com/Highsky7/YOLOTL) โปรเจกต์นี้ใช้สถาปัตยกรรมที่เขียนเอง ไม่ใช้ weights ของตัวอย่างดังกล่าว
+- [Ultrafast Lane Detection](https://github.com/ibaiGorordo/Ultrafast-Lane-Detection-Inference-Pytorch-)
+- [YOLOTL](https://github.com/Highsky7/YOLOTL)
+
+ลิงก์เหล่านี้เป็นตัวอย่างที่ผู้สอนให้ศึกษา โครงการนี้ใช้ custom U-Net ที่เขียนเองและไม่ใช้ weights จากตัวอย่าง

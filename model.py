@@ -52,5 +52,5 @@ class LaneNet(nn.Module):
 if __name__ == '__main__':
     net = LaneNet().eval()
     with torch.inference_mode():
-        print('Output:', tuple(net(torch.zeros(1, 3, 96, 160)).shape))
+        print('Output:', tuple(net(torch.zeros(1, 3, 36, 64)).shape))
     print('Parameters:', sum(p.numel() for p in net.parameters()))

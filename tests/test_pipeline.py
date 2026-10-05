@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 import torch
 from dataset import load_polygons,native_mask
-from evaluate import counts,ratio
+from evaluate import counts,ratio,is_detected
 from model import LaneNet
 from common import loss_function
 
@@ -35,13 +35,18 @@ class PipelineTests(unittest.TestCase):
     def test_forward_backward_all_layers(self):
         torch.set_num_threads(2)
         model=LaneNet()
-        image=torch.randn(1,3,49,81)
+        image=torch.randn(1,3,36,64)
         out=model(image)
-        self.assertEqual(tuple(out.shape),(1,1,49,81))
+        self.assertEqual(tuple(out.shape),(1,1,36,64))
         loss=loss_function(out,torch.zeros_like(out))
         self.assertTrue(torch.isfinite(loss))
         loss.backward()
         self.assertTrue(all(p.requires_grad and p.grad is not None and torch.isfinite(p.grad).all() for p in model.parameters()))
+
+    def test_detection_threshold_strictly_greater(self):
+        self.assertFalse(is_detected(.6,True))
+        self.assertTrue(is_detected(.60001,True))
+        self.assertFalse(is_detected(1.,False))
 
 
 if __name__=='__main__':

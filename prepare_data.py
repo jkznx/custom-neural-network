@@ -1,4 +1,4 @@
-"""Convert CVAT image XML exports to lane-only YOLO-seg with chronological splits."""
+"""Convert CVAT polygon:lane to YOLO-seg and chronological 65/35 splits."""
 import argparse
 from collections import Counter
 import hashlib
@@ -23,13 +23,12 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--source', required=True)
     p.add_argument('--output', default='data')
-    p.add_argument('--val-count', type=int, default=100)
-    p.add_argument('--gap', type=int, default=20)
+    p.add_argument('--train-ratio', type=float, default=.65)
     p.add_argument('--archive-cache', default='archive-cache')
     p.add_argument('--skip-missing', action='store_true', help='Explicitly audit and exclude missing images')
     args = p.parse_args()
-    if args.val_count < 1 or args.gap < 0:
-        p.error('val-count >= 1; gap >= 0')
+    if not 0 < args.train_ratio < 1:
+        p.error('train-ratio must be in (0,1)')
     source, out = Path(args.source), Path(args.output)
     if out.exists() and any(out.iterdir()):
         raise ValueError('Prepared output must be empty')
@@ -86,35 +85,37 @@ def main():
                     lines.append('0 '+' '.join(f'{v:.9f}' for v in normalized.ravel()))
                 records.append({'group':group,'frame':frame_number(name),'name':name,
                     'source':image,'annotation':xml,'lines':lines,'clipped':clipped})
-    training = sorted([r for r in records if r['group']=='Train'],key=lambda r:r['frame'])
-    if len(training)<=args.val_count+args.gap:
-        raise ValueError('Not enough training records')
-    val_start = training[-args.val_count]['frame']
-    gap_start = training[-args.val_count-args.gap]['frame'] if args.gap else val_start
-    manifest, hashes, names, duplicates = [], {}, set(), []
+    manifest, hashes, names, duplicates, unique = [], {}, set(), [], []
     for r in records:
-        split = 'test' if r['group']=='Test' else ('val' if r['frame']>=val_start else 'excluded_gap' if r['frame']>=gap_start else 'train')
-        key = (split,r['name'])
-        if key in names:
-            raise ValueError(f'Duplicate record: {key}')
-        names.add(key)
         digest = hashlib.sha256(r['source'].read_bytes()).hexdigest()
         if digest in hashes:
             duplicates.append({'name':r['name'],'same_as':hashes[digest],'group':r['group']})
             continue
         hashes[digest]=r['name']
+        r['sha256']=digest
+        unique.append(r)
+    unique.sort(key=lambda r:(r['frame'],r['name']))
+    train_count=int(len(unique)*args.train_ratio)
+    if not 0 < train_count < len(unique):
+        raise ValueError('Not enough unique images for train/test')
+    for index,r in enumerate(unique):
+        split='train' if index < train_count else 'test'
+        key=r['name']
+        if key in names:
+            raise ValueError(f'Duplicate name with different bytes: {key}')
+        names.add(key)
         row = {'split':split,'frame':r['frame'],'name':r['name'],'source':str(r['source']),
-               'annotation':str(r['annotation']),'sha256':digest,'lane_polygons':len(r['lines']),
+               'annotation':str(r['annotation']),'sha256':r['sha256'],'lane_polygons':len(r['lines']),
                'clipped_polygons':r['clipped']}
         manifest.append(row)
-        if split=='excluded_gap':
-            continue
         image_dir,label_dir = out/'images'/split,out/'labels'/split
         image_dir.mkdir(parents=True,exist_ok=True); label_dir.mkdir(parents=True,exist_ok=True)
         shutil.copy2(r['source'],image_dir/r['name'])
         (label_dir/(Path(r['name']).stem+'.txt')).write_text('\n'.join(r['lines'])+'\n',encoding='utf-8')
     summary = {'counts':dict(Counter(r['split'] for r in manifest)),
-               'ignored_shapes':dict(ignored),'val_start_frame':val_start,'gap_start_frame':gap_start,
+               'ignored_shapes':dict(ignored),'train_ratio_requested':args.train_ratio,
+               'train_ratio_actual':train_count/len(unique),'test_start_frame':unique[train_count]['frame'],
+               'split_method':'chronological across all available unique images; original Train/Test regrouped',
                'clipped_polygons':sum(r['clipped_polygons'] for r in manifest),
                'selected_label':'polygon:lane','source':str(source.resolve()),
                'missing_images':len(missing),'excluded_duplicates':len(duplicates)}

@@ -1,0 +1,13 @@
+{
+  "data_root": "data65",
+  "output": "runs/lane64x36",
+  "epochs": 30,
+  "batch_size": 4,
+  "height": 36,
+  "width": 64,
+  "base": 6,
+  "lr": 0.001,
+  "seed": 42,
+  "threads": 4,
+  "device": "cpu"
+}

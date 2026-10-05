@@ -58,7 +58,7 @@ def image_tensor(image, height, width):
 
 
 class LaneDataset(Dataset):
-    def __init__(self, images_dir, labels_dir, height=96, width=160, augment=False):
+    def __init__(self, images_dir, labels_dir, height=36, width=64, augment=False):
         self.images = list_images(images_dir)
         self.labels_dir = Path(labels_dir)
         self.height, self.width, self.augment = height, width, augment
