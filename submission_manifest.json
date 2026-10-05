@@ -12,8 +12,8 @@
     },
     {
       "path": "custom-unet-architecture.md",
-      "bytes": 1193,
-      "sha256": "6392f431dcf7ee95c5de3881540c086ab30b0896af7b0c56ea52e0ecbed00c35"
+      "bytes": 4441,
+      "sha256": "48716f85280d9eb5364a89a8c71abd10f568a9229b18a8f2cb331db8d74b4a62"
     },
     {
       "path": "dataset.py",
@@ -47,8 +47,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 23484,
-      "sha256": "5dc55163cc00122e4f4163ade75da2a47ad74cfee4efcf2097bf3c104fe519da"
+      "bytes": 24375,
+      "sha256": "3259bea06adceb67524c81d4fa74e646b74fb9b0f8e322f86a1ddf366dc3dbb5"
     },
     {
       "path": "report.py",

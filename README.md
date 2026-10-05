@@ -35,18 +35,43 @@
 
 ```mermaid
 flowchart TD
-  X[RGB 3 x 96 x 160] --> E1[Residual 6 channels]
-  E1 --> P1[MaxPool 2] --> E2[Residual 12 channels]
-  E2 --> P2[MaxPool 2] --> E3[Residual 24 channels]
-  E3 --> P3[MaxPool 2] --> B[Residual 48 channels]
-  B --> U3[Bilinear + concat E3] --> D3[Residual 24 channels]
-  D3 --> U2[Bilinear + concat E2] --> D2[Residual 12 channels]
-  D2 --> U1[Bilinear + concat E1] --> D1[Residual 6 channels]
-  D1 --> H[Conv 1x1 to 1 logit channel]
-  H --> M[Sigmoid + threshold 0.5]
-  E3 -. skip .-> U3
-  E2 -. skip .-> U2
-  E1 -. skip .-> U1
+    INPUT["RGB input<br/>3 x 96 x 160"]
+
+    subgraph ENC["Encoder"]
+        E1["Residual block: 3 to 6<br/>6 x 96 x 160"]
+        P1["MaxPool 2 x 2"]
+        E2["Residual block: 6 to 12<br/>12 x 48 x 80"]
+        P2["MaxPool 2 x 2"]
+        E3["Residual block: 12 to 24<br/>24 x 24 x 40"]
+        P3["MaxPool 2 x 2"]
+        E1 --> P1 --> E2 --> P2 --> E3 --> P3
+    end
+
+    BRIDGE["Bottleneck residual block: 24 to 48<br/>48 x 12 x 20"]
+
+    subgraph DEC["Decoder"]
+        U3["Bilinear upsample<br/>48 x 24 x 40"]
+        C3["Concat with E3<br/>72 x 24 x 40"]
+        D3["Residual block: 72 to 24<br/>24 x 24 x 40"]
+        U2["Bilinear upsample<br/>24 x 48 x 80"]
+        C2["Concat with E2<br/>36 x 48 x 80"]
+        D2["Residual block: 36 to 12<br/>12 x 48 x 80"]
+        U1["Bilinear upsample<br/>12 x 96 x 160"]
+        C1["Concat with E1<br/>18 x 96 x 160"]
+        D1["Residual block: 18 to 6<br/>6 x 96 x 160"]
+        U3 --> C3 --> D3 --> U2 --> C2 --> D2 --> U1 --> C1 --> D1
+    end
+
+    HEAD["Conv 1 x 1: 6 to 1<br/>Logits: 1 x 96 x 160"]
+    MASK["Sigmoid, then threshold greater than 0.5<br/>Binary lane mask: 96 x 160"]
+    NATIVE["Nearest-neighbor resize<br/>Mask at original image resolution"]
+
+    INPUT --> E1
+    P3 --> BRIDGE --> U3
+    E3 -. "skip features" .-> C3
+    E2 -. "skip features" .-> C2
+    E1 -. "skip features" .-> C1
+    D1 --> HEAD --> MASK --> NATIVE
 ```
 
 ## Dataset และการป้องกัน data leakage
