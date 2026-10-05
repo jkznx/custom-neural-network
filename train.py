@@ -35,8 +35,8 @@ def run_epoch(model, loader, device, optimizer=None):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--data-root', required=True)
-    p.add_argument('--output', default='runs/lane64x36')
-    p.add_argument('--epochs', type=int, default=30)
+    p.add_argument('--output', default='runs/lane64x36_e50')
+    p.add_argument('--epochs', type=int, default=50)
     p.add_argument('--batch-size', type=int, default=4)
     p.add_argument('--height', type=int, default=36)
     p.add_argument('--width', type=int, default=64)

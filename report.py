@@ -25,9 +25,9 @@ def plot_history(history, output):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--run',default='runs/lane64x36')
-    p.add_argument('--evaluation',default='run/test64x36/metrics.json')
-    p.add_argument('--memory',default='run/test64x36/memory.json')
+    p.add_argument('--run',default='runs/lane64x36_e50')
+    p.add_argument('--evaluation',default='run/test64x36_e50/metrics.json')
+    p.add_argument('--memory',default='run/test64x36_e50/memory.json')
     p.add_argument('--readme',default='README.md')
     args=p.parse_args(); run=Path(args.run); inf=Path(args.memory).parent
     with (run/'history.csv').open() as f:

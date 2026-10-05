@@ -84,7 +84,7 @@ flowchart TD
 | Test | 367 | 35.02% | ใช้ประเมินหลังเทรนจบเท่านั้น |
 | รวม | 1,048 | 100% | ภาพที่มีจริงและไม่ซ้ำ |
 
-สัดส่วนคลาดจาก 65/35 เล็กน้อยเพราะจำนวนภาพต้องเป็นจำนวนเต็ม Train จบที่ frame 835 และ Test เริ่ม frame 836 ไม่มี validation แยก ไม่มี temporal gap และเลือก final checkpoint หลังครบ 30 epochs โดยไม่ใช้คะแนน Test
+สัดส่วนคลาดจาก 65/35 เล็กน้อยเพราะจำนวนภาพต้องเป็นจำนวนเต็ม Train จบที่ frame 835 และ Test เริ่ม frame 836 ไม่มี validation แยก ไม่มี temporal gap และเลือก final checkpoint หลังครบ 50 epochs โดยไม่ใช้คะแนน Test
 
 พบ XML อ้างถึงภาพที่ไม่มีไฟล์จริง 100 ภาพ (ช่วง 450–499 และ 600–649) และภาพซ้ำ 2 ภาพ จึงตัดออกพร้อม audit log ใน [dataset_manifest.json](dataset_manifest.json) ใช้เฉพาะข้อมูลที่มีจริง ผลนี้ยังอาจสัมพันธ์กันจากวิดีโอหรือเส้นทางเดียวกัน และไม่ยืนยัน generalization ไปยังการถ่ายครั้งอื่น
 
@@ -128,30 +128,30 @@ python prepare_data.py --source "C:\Users\ACER\Desktop\1-2569\353-Ecosystem\P_RA
 
 เปลี่ยน source เป็น path dataset ของเครื่องที่จะรัน `--skip-missing` ยืนยันการข้ามภาพที่ขาดพร้อมบันทึกใน manifest ถ้าไม่ระบุจะหยุดเมื่อพบภาพหาย
 
-### 2. Train from scratch 30 epochs
+### 2. Train from scratch 50 epochs
 
 ```powershell
-python train.py --data-root data65 --output runs/lane64x36 --epochs 30 --batch-size 4 --width 64 --height 36 --base 6 --threads 4 --device cpu
-tensorboard --logdir runs/lane64x36/tensorboard
+python train.py --data-root data65 --output runs/lane64x36_e50 --epochs 50 --batch-size 4 --width 64 --height 36 --base 6 --threads 4 --device cpu
+tensorboard --logdir runs/lane64x36_e50/tensorboard
 ```
 
-ใช้ AdamW, lr 0.001, weight decay 0.0001, seed 42, float32, batch 4 (ลดเป็น 2 ได้) ทุก layer รับ gradient และไม่โหลด checkpoint ก่อนเทรน Cache ภาพ/target ขนาด network ใน RAM เป็น uint8 เฉพาะ training เท่านั้น เก็บ `history.csv`, `loss.png`, TensorBoard scalars `loss/train` และ `iou/train`, config, environment, split manifest และ **model.pt จาก epoch 30**
+ใช้ AdamW, lr 0.001, weight decay 0.0001, seed 42, float32, batch 4 (ลดเป็น 2 ได้) ทุก layer รับ gradient และไม่โหลด checkpoint ก่อนเทรน Cache ภาพ/target ขนาด network ใน RAM เป็น uint8 เฉพาะ training เท่านั้น เก็บ `history.csv`, `loss.png`, TensorBoard scalars `loss/train` และ `iou/train`, config, environment, split manifest และ **model.pt จาก epoch 50**
 
 Augmentation เฉพาะ Train: random white balance gain 0.94–1.06, brightness shift ±15/255 และ Gaussian blur sigma 0.1–0.6 เล็กน้อย Test ไม่ augment
 
 ### 3. Inference: binary masks ใต้ run/
 
 ```powershell
-python inference.py --images-dir data65/images/test --labels-dir data65/labels/test --checkpoint runs/lane64x36/model.pt --output run/test64x36 --threads 4 --device cpu
+python inference.py --images-dir data65/images/test --labels-dir data65/labels/test --checkpoint runs/lane64x36_e50/model.pt --output run/test64x36_e50 --threads 4 --device cpu
 ```
 
-ขนาด input อ่านจาก checkpoint ไฟล์ PNG binary masks ขนาด **64×36** อยู่ใน `run/test64x36/masks/` และสำเนาขนาดภาพเดิมใน `native_masks/` พร้อม snapshot และ memory report ใช้ batch 1 กับ inference_mode
+ขนาด input อ่านจาก checkpoint ไฟล์ PNG binary masks ขนาด **64×36** อยู่ใน `run/test64x36_e50/masks/` และสำเนาขนาดภาพเดิมใน `native_masks/` พร้อม snapshot และ memory report ใช้ batch 1 กับ inference_mode
 
 ### 4. Evaluation และรายงาน
 
 ```powershell
-python evaluation.py --images-dir data65/images/test --labels-dir data65/labels/test --pred-masks-dir run/test64x36/masks --width 64 --height 36 --output run/test64x36/metrics.json
-python report.py --run runs/lane64x36 --evaluation run/test64x36/metrics.json --memory run/test64x36/memory.json
+python evaluation.py --images-dir data65/images/test --labels-dir data65/labels/test --pred-masks-dir run/test64x36_e50/masks --width 64 --height 36 --output run/test64x36_e50/metrics.json
+python report.py --run runs/lane64x36_e50 --evaluation run/test64x36_e50/metrics.json --memory run/test64x36_e50/memory.json
 python -m unittest discover -s tests -v
 ```
 
@@ -162,11 +162,11 @@ python -m unittest discover -s tests -v
 <!-- RESULTS_START -->
 ### กราฟ loss และการลู่เข้า
 
-![Training loss and IoU](runs/lane64x36/loss.png)
+![Training loss and IoU](runs/lane64x36_e50/loss.png)
 
-เทรนจริง 30 epochs บน CPU, batch 4, float32, seed 42 ค่า train loss ลดจาก **0.120468** เป็น **0.012987** เวลา epoch loop **76.1 วินาที** บันทึกทุก epoch ใน [history.csv](runs/lane64x36/history.csv)
+เทรนจริง 50 epochs บน CPU, batch 4, float32, seed 42 ค่า train loss ลดจาก **0.120468** เป็น **0.009833** เวลา epoch loop **145.1 วินาที** บันทึกทุก epoch ใน [history.csv](runs/lane64x36_e50/history.csv)
 
-กราฟนี้เป็น training loss การรันนี้ใช้ Train 65% ทั้งหมดและ Test 35% ไม่มี validation split แยก เลือก checkpoint epoch 30 ซึ่งเป็น epoch สุดท้ายตามที่กำหนดก่อนเทรน ไม่ใช้ Test เลือก checkpoint หรือ threshold การลดลงของ training loss แสดงการเรียนรู้ชุด Train; ประสิทธิภาพกับข้อมูลที่ไม่ได้ใช้เทรนดูจาก Test ด้านล่าง
+กราฟนี้เป็น training loss การรันนี้ใช้ Train 65% ทั้งหมดและ Test 35% ไม่มี validation split แยก เลือก checkpoint epoch 50 ซึ่งเป็น epoch สุดท้ายตามที่กำหนดก่อนเทรน ไม่ใช้ Test เลือก checkpoint หรือ threshold การลดลงของ training loss แสดงการเรียนรู้ชุด Train; ประสิทธิภาพกับข้อมูลที่ไม่ได้ใช้เทรนดูจาก Test ด้านล่าง
 
 ### ค่าประสิทธิภาพของโมเดล
 
@@ -175,20 +175,20 @@ python -m unittest discover -s tests -v
 | Metric | ผลจริง |
 |---|---:|
 | Test images | 367 |
-| Global pixel-wise lane IoU | 0.828676 |
-| Mean per-image IoU | 0.828612 |
-| Dice / F1 | 0.906313 |
-| Precision | 0.864659 |
-| Recall | 0.952183 |
+| Global pixel-wise lane IoU | 0.824814 |
+| Mean per-image IoU | 0.824852 |
+| Dice / F1 | 0.903998 |
+| Precision | 0.857182 |
+| Recall | 0.956223 |
 | Detected: GT lane and IoU > 0.6 | 367 / 367 |
 | Detection rate | 100.00% |
-| Average IoU of detected results | 0.828612 |
+| Average IoU of detected results | 0.824852 |
 
-ผล Yes/No และคะแนน IoU รายภาพอยู่ใน [metrics.json](run/test64x36/metrics.json) Detection rate คือการผ่านเกณฑ์ IoU > 0.6 ไม่ใช่ความถูกต้องทุก pixel Global IoU รวม TP/FP/FN ทุกภาพ ส่วน mean per-image IoU เฉลี่ยรายภาพ
+ผล Yes/No และคะแนน IoU รายภาพอยู่ใน [metrics.json](run/test64x36_e50/metrics.json) Detection rate คือการผ่านเกณฑ์ IoU > 0.6 ไม่ใช่ความถูกต้องทุก pixel Global IoU รวม TP/FP/FN ทุกภาพ ส่วน mean per-image IoU เฉลี่ยรายภาพ
 
 ### ตัวอย่างก่อนและหลัง inference
 
-![Original, predicted mask, overlay and polygon ground truth](run/test64x36/snapshot.png)
+![Original, predicted mask, overlay and polygon ground truth](run/test64x36_e50/snapshot.png)
 
 ภาพ `frame_0836_f21681.jpg` เป็นภาพแรกตามชื่อไฟล์ที่เลือกก่อนคำนวณคะแนน จากซ้าย: RGB ต้นฉบับ, binary lane mask, overlay สีเขียวหลัง inference และ GT จาก polygon lane ภาพแสดงผลขยายกลับขนาดเดิมเพื่อดูง่าย ไฟล์ผลหลักใน masks/ มีขนาด 64×36 และมี native_masks/ สำหรับภาพขนาดเดิม
 
@@ -200,13 +200,13 @@ python -m unittest discover -s tests -v
 |---|---:|
 | Parameters | 72,859 |
 | FP32 model parameters + buffers | 0.2779 MiB |
-| Baseline RSS ก่อนโหลดโมเดล | 197.61 MiB |
-| Sampled peak process RSS | 243.13 MiB |
-| Peak RSS increase over baseline | 45.52 MiB |
-| Windows lifetime peak working set | 248.23 MiB |
-| Mean forward latency หลัง warmup | 1.97 ms/image |
+| Baseline RSS ก่อนโหลดโมเดล | 200.88 MiB |
+| Sampled peak process RSS | 247.05 MiB |
+| Peak RSS increase over baseline | 46.17 MiB |
+| Windows lifetime peak working set | 252.98 MiB |
+| Mean forward latency หลัง warmup | 2.19 ms/image |
 
-RSS รวม Python, PyTorch, โหลด checkpoint, warmup, inference, image buffers, mask export และ snapshot อ่านทุก 10 ms จึงอาจพลาด peak สั้น ๆ Windows lifetime peak working set เป็นค่า OS ตลอด process รวมช่วงเริ่มโปรแกรมด้วย ขนาด parameter อย่างเดียวไม่ใช่ inference memory ทั้ง process ค่า latency วัดเฉพาะ forward ไม่รวม decode, preprocessing, sigmoid, resize และบันทึกไฟล์ การรันบน CPU จึงไม่มีค่า CUDA VRAM รายละเอียดใน [memory.json](run/test64x36/memory.json)
+RSS รวม Python, PyTorch, โหลด checkpoint, warmup, inference, image buffers, mask export และ snapshot อ่านทุก 10 ms จึงอาจพลาด peak สั้น ๆ Windows lifetime peak working set เป็นค่า OS ตลอด process รวมช่วงเริ่มโปรแกรมด้วย ขนาด parameter อย่างเดียวไม่ใช่ inference memory ทั้ง process ค่า latency วัดเฉพาะ forward ไม่รวม decode, preprocessing, sigmoid, resize และบันทึกไฟล์ การรันบน CPU จึงไม่มีค่า CUDA VRAM รายละเอียดใน [memory.json](run/test64x36_e50/memory.json)
 
 <!-- RESULTS_END -->
 
@@ -216,11 +216,24 @@ RSS รวม Python, PyTorch, โหลด checkpoint, warmup, inference, image
 
 ใช้ลิงก์ repository นี้สำหรับส่ง Assignment-10 โดยมีโค้ด, README, Mermaid architecture, checkpoint ที่เทรนแล้ว และผลการประเมินจริงครบใน repository
 
+### เปรียบเทียบรอบ 30 และ 50 epochs
+
+ใช้ชุด Train/Test, seed, optimizer และ augmentation เดียวกัน ตรวจแล้วว่า training trajectory ใน 30 epochs แรกตรงกัน และรายชื่อ Test ตรงกันทั้งหมด
+
+| รอบเทรน | Final train loss | Global Test IoU | Test Dice / F1 |
+|---|---:|---:|---:|
+| 30 epochs | 0.012987 | 0.828676 | 0.906313 |
+| 50 epochs | 0.009833 | 0.824814 | 0.903998 |
+
+แม้ train loss ลดลง แต่ Test IoU ของรอบ 50 epochs ต่ำกว่ารอบ 30 epochs เล็กน้อย จึงไม่สรุปว่าการเทรนนานขึ้นทำให้ generalization ดีขึ้น รอบ 50 epochs เป็นผลหลักตามคำขอล่าสุด และไม่มีการเปลี่ยน checkpoint โดยอาศัยคะแนน Test
+
+ผลรอบ 30 epochs เดิมเก็บไว้ใน `runs/lane64x36/` และ `run/test64x36/` เพื่ออ้างอิงประวัติ ส่วนผลหลักใน README นี้ใช้รอบ **50 epochs** ตามคำขอล่าสุด
+
 ## ข้อจำกัดและการส่งงาน
 
 Input ขนาด 64×36 อาจทำให้ขอบเลนและพื้นที่แคบสูญหาย ผลคะแนนชุดนี้วัดที่ขนาด mask 64×36 จึงไม่ควรเทียบตรงกับคะแนนรอบเก่าที่วัดคนละ resolution และ split ผลรอบ 96×160 เดิมใน `runs/lane/` และ `run/test/` เป็นประวัติรอบก่อน ไม่ใช่ผลตามข้อกำหนดล่าสุด
 
-ส่ง repo พร้อม README, Mermaid architecture, scripts, requirements, tests, dataset_manifest.json, `runs/lane64x36/model.pt`, history/กราฟ loss และ `run/test64x36/{metrics.json,memory.json,snapshot.png,predictions.json}` Dataset และ prediction masks จำนวนมากเก็บใน working directory local และถูก gitignore สามารถเตรียมใหม่จาก dataset ต้นทางได้
+ส่ง repo พร้อม README, Mermaid architecture, scripts, requirements, tests, dataset_manifest.json, `runs/lane64x36_e50/model.pt`, history/กราฟ loss และ `run/test64x36_e50/{metrics.json,memory.json,snapshot.png,predictions.json}` Dataset และ prediction masks จำนวนมากเก็บใน working directory local และถูก gitignore สามารถเตรียมใหม่จาก dataset ต้นทางได้
 
 ## ตัวอย่างงานที่เกี่ยวข้อง
 

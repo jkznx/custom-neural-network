@@ -56,7 +56,7 @@ def main():
     p.add_argument('--images-dir',required=True)
     p.add_argument('--labels-dir',help='Optional ground truth for snapshot only')
     p.add_argument('--checkpoint',required=True)
-    p.add_argument('--output',default='run/test64x36')
+    p.add_argument('--output',default='run/test64x36_e50')
     p.add_argument('--threshold',type=float,default=.5)
     p.add_argument('--threads',type=int,default=4)
     p.add_argument('--device',choices=['auto','cpu','cuda'],default='auto')

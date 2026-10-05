@@ -32,7 +32,7 @@ def main():
     p.add_argument('--iou-threshold',type=float,default=.6)
     p.add_argument('--height',type=int,default=36)
     p.add_argument('--width',type=int,default=64)
-    p.add_argument('--output',default='run/test64x36/metrics.json')
+    p.add_argument('--output',default='run/test64x36_e50/metrics.json')
     args=p.parse_args()
     if not 0<=args.iou_threshold<=1:
         p.error('IoU threshold in [0,1]')
