@@ -6,7 +6,7 @@
 
 ## โครงสร้างและเหตุผล
 
-โมเดล **LaneNet-v1** เป็น residual encoder-decoder รูปตัว U ที่เขียนขึ้นเองใน `model.py` มี encoder 3 ระดับและ bottleneck ใช้ channel 6 → 12 → 24 → 48 decoder ใช้ bilinear interpolation, concat skip features และ residual block ก่อน convolution 1×1 ที่ให้ logits หนึ่ง channel
+โมเดล **LaneNet-v1** เป็น residual encoder-decoder รูปตัว U ที่เขียนขึ้นเองใน `model.py` มี encoder 3 ระดับและ bottleneck ใช้ channel 6 → 12 → 24 → 48 decoder ใช้ bilinear interpolation, concat skip features และ residual block ก่อน convolution 1×1 ที่ให้ logits หนึ่ง channel มี trainable parameters รวม **72,859 ตัว**
 
 แต่ละ residual block = Conv3×3 → GroupNorm(3 groups) → ReLU → Conv3×3 → GroupNorm บวก shortcut (identity หรือ Conv1×1 เมื่อจำนวน channel เปลี่ยน) แล้ว ReLU น้ำหนัก convolution ทุกชั้นเริ่มด้วย Kaiming random initialization และ trainable ทั้งหมด
 
@@ -136,41 +136,81 @@ IoU = TP/(TP+FP+FN), Dice = 2TP/(2TP+FP+FN), precision = TP/(TP+FP), recall = TP
 ## ผลการเทรนและประเมินจริง
 
 <!-- RESULTS_START -->
-ผลจากการรันจริงบน cpu: 30 epochs, input 96×160, inference batch = 1
+ผลต่อไปนี้มาจากการเทรนและ inference จริงของ **LaneNet-v1** บน PSU-reservoir dataset ที่ระบุไว้ด้านบน ใช้ CPU, float32, input 96×160, seed 42 และเทรนทุก layer ใหม่ทั้งหมดเป็นเวลา 30 epochs เลือก `runs/lane/best.pt` จาก validation loss ต่ำสุดที่ **epoch 20** โดยไม่ใช้ Test ในการเลือก checkpoint หรือ threshold
 
-| รายการ | ผลจริง |
+### กราฟ loss และการลู่เข้า
+
+![กราฟ train/validation loss และ IoU ระหว่างการเทรน](runs/lane/loss.png)
+
+| จุดของการเทรน | Train loss | Validation loss |
+|---|---:|---:|
+| Epoch 1 | 0.153356 | 0.070987 |
+| Best checkpoint: epoch 20 | 0.030250 | 0.032979 |
+| Epoch 30 | 0.022217 | 0.040079 |
+
+Loss ที่แสดงคือ 0.5 BCEWithLogits + 0.5 soft Dice กราฟด้านซ้ายแสดงว่า train loss ลดลง และ validation loss ลดลงในช่วงแรกก่อนแกว่งตัวใกล้ช่วงต่ำสุด กราฟด้านขวาแสดง global lane IoU ที่ความละเอียดของ network การเทรนต่อหลัง epoch 20 ทำให้ train loss ลดลง แต่ validation loss ไม่ดีขึ้นอย่างสม่ำเสมอ จึงรายงานผล Test ด้วย best checkpoint แทน epoch สุดท้าย
+
+เวลาเทรนเฉพาะ epoch loop: **245.4 วินาที** ข้อมูลทุก epoch อยู่ใน [history.csv](runs/lane/history.csv) และกราฟสร้างจากไฟล์นี้
+
+### ค่าการวัดผลประสิทธิภาพ
+
+ประเมิน Test **400 ภาพ** ที่ความละเอียดต้นฉบับ 1280×720 โดยนำ mask ขนาด 96×160 กลับไปขนาดภาพเดิมด้วย nearest-neighbor และใช้ sigmoid > 0.5 เป็น foreground
+
+| Metric | ผลจริง |
 |---|---:|
-| Test images | 400 |
-| Selected checkpoint epoch (minimum validation loss) | 20 |
-| Final train loss (epoch 30) | 0.022217 |
-| Final validation loss (epoch 30) | 0.040079 |
-| Global lane IoU | 0.933014 |
-| Global Dice / F1 | 0.965347 |
+| Global lane IoU | 0.933014 (93.30%) |
+| Global Dice / F1 | 0.965347 (96.53%) |
 | Pixel precision | 0.965736 |
 | Pixel recall | 0.964957 |
+| Pixel accuracy | 0.964970 |
 | Mean per-image IoU | 0.933073 |
-| Images with lane and IoU > 0.6 | 400 / 400 |
-| Detection rate (IoU > 0.6, positive images) | 1.000000 |
-| Mean IoU of detected positive images | 0.9330731375425491 |
-| Parameters | 72,859 |
-| FP32 model parameters + buffers | 0.2779 MiB |
-| Sampled peak process RSS | 246.82 MiB |
-| Process peak working set (Windows, lifetime) | 252.7578125 MiB |
-| Peak RSS increase over pre-model baseline | 49.25 MiB |
-| Mean forward latency (warm model) | 5.57 ms/image |
+| ภาพที่มี lane และ IoU > 0.6 | 400 / 400 |
+| Detection rate ตามเกณฑ์ IoU > 0.6 | 100.00% |
+| Average IoU เฉพาะภาพที่ detected | 0.933073 |
 
-![Training and validation loss](runs/lane/loss.png)
+Global IoU คำนวณจาก TP/FP/FN รวมทุกภาพ ส่วน mean per-image IoU คำนวณ IoU ของแต่ละภาพแล้วเฉลี่ย ค่าจึงอาจต่างกัน คะแนน detection rate 100% หมายถึงทุกภาพผ่านเกณฑ์ IoU > 0.6 ไม่ได้หมายถึงทุก pixel ถูกต้อง รายละเอียดคะแนนรายภาพและ confusion counts อยู่ใน [metrics.json](run/test/metrics.json)
 
-![Original, prediction, overlay, ground truth](run/test/snapshot.png)
+### ตัวอย่างก่อนและหลัง inference
 
-Training elapsed: 245.4 seconds. Checkpoint selection uses minimum validation loss; test data were not used for optimization or threshold selection. Pixel metrics use original image resolution after nearest-neighbor resizing of predicted masks. RSS includes Python, PyTorch, image buffers and output processing; model size alone is not total inference memory. Sampling every 10 ms can miss brief peaks. Windows lifetime peak working set is reported separately. CUDA allocation is unavailable in this CPU run.
+![ก่อน inference, binary lane mask, prediction overlay และ ground truth](run/test/snapshot.png)
 
-กราฟแสดงว่า train loss ลดลงและ validation loss เข้าสู่ช่วงแกว่งตัวหลังช่วงแรก ค่า validation loss ต่ำสุดอยู่ที่ epoch 20 ไม่ใช่ epoch สุดท้าย การเทรนต่อทำให้ train loss ลดลงแต่ validation loss ไม่ดีขึ้นสม่ำเสมอ จึงใช้ best checkpoint เพื่อลดผลของ overfitting ภาพ snapshot เลือกภาพแรกตามชื่อไฟล์ (`frame_0002_f52.jpg`) ก่อนคำนวณคะแนน ไม่ได้เลือกภาพที่มีคะแนนสูงสุด ทั้ง 400 ภาพ Test มี lane จึงยังไม่มีหลักฐานจากชุดทดสอบภาพที่ไม่มี lane
+ภาพตัวอย่าง `frame_0002_f52.jpg` แสดง 4 ช่องจากซ้ายไปขวา:
+
+1. **ก่อน inference:** ภาพ RGB ต้นฉบับ
+2. **หลัง inference:** binary mask ที่โมเดลทำนาย โดยสีขาวคือ lane และสีดำคือ background
+3. **Prediction overlay:** พื้นที่สีเขียวคือ lane ที่ทำนาย ซ้อนบนภาพต้นฉบับ
+4. **Ground truth:** mask ที่สร้างจาก polygon label `lane` เท่านั้น
+
+เลือกภาพแรกตามชื่อไฟล์ก่อนคำนวณคะแนน ไม่ได้เลือกภาพที่มีคะแนนสูงสุด จากภาพยังเห็นความคลาดเคลื่อนบริเวณขอบและแถบกึ่งกลางเลน ซึ่งสอดคล้องกับข้อจำกัดของ input ความละเอียดต่ำ ภาพนี้แสดงการแบ่งพื้นที่เลนตาม annotation ไม่ใช่การตรวจเส้นตีถนน
+
+### Memory footprint ที่ใช้ในการ inference
+
+วัดจริงบน **Windows-11-10.0.26300-SP0**, PyTorch **2.14.1+cpu**, CPU **Intel64 Family 6 Model 186 Stepping 2, GenuineIntel**, 4 threads, input **96×160**, float32, **batch size 1** ใช้ `torch.inference_mode()` และ warmup 5 ครั้ง
+
+| รายการ | ค่าที่วัดได้ | ความหมาย |
+|---|---:|---|
+| Trainable parameters | 72,859 | จำนวน parameter ของโมเดล |
+| FP32 parameters + buffers | 0.2779 MiB | ขนาด tensor ของโมเดล ไม่รวม runtime และ activations |
+| Process RSS ก่อนโหลดโมเดล | 197.57 MiB | Baseline หลัง import libraries |
+| Sampled peak process RSS | 246.82 MiB | Peak ระหว่างโหลดโมเดลและ inference pipeline |
+| Peak RSS ที่เพิ่มจาก baseline | 49.25 MiB | Sampled peak ลบ baseline |
+| Windows peak working set ตลอดอายุ process | 252.76 MiB | OS-reported peak รวมช่วงเริ่มโปรแกรม |
+| Mean forward latency หลัง warmup | 5.57 ms/image | เฉพาะ forward pass |
+
+Memory footprint ของทั้ง process ในการรันนี้อยู่ประมาณ **252.76 MiB** ตาม Windows peak working set ไม่ใช่เพียงขนาด parameter 0.2779 MiB ค่านี้รวม Python, PyTorch และ buffer ประมวลผลภาพด้วย จึงเป็นหลักฐานว่า inference รันได้บนเครื่อง local ที่ใช้ทดสอบ โดย memory อาจต่างกันเมื่อเปลี่ยนระบบ ขนาดภาพ หรือ batch size
+
+Sampled RSS อ่านทุก 10 ms ตั้งแต่ก่อนโหลดโมเดล ครอบคลุมการโหลด checkpoint, warmup, inference ทั้ง 400 ภาพ, การถอดรหัสภาพ, export masks และสร้าง snapshot การ sampling อาจพลาด peak ที่สั้นมาก จึงรายงาน Windows lifetime peak แยกด้วย ส่วน forward latency ไม่รวมการอ่านภาพ, preprocessing, sigmoid, resize และบันทึกไฟล์ การรันนี้ใช้ CPU จึงไม่มีค่า CUDA VRAM รายละเอียดอยู่ใน [memory.json](run/test/memory.json)
+
+### ข้อจำกัดในการตีความผล
+
+ทั้ง 400 ภาพ Test มี lane จึงยังไม่มีผลทดสอบภาพที่ไม่มี lane และเป็นข้อมูลจากเส้นทาง/ชุดข้อมูลที่ให้มา คะแนนนี้ยังไม่ยืนยันประสิทธิภาพบนสถานที่ สภาพแสง หรือวิดีโอการถ่ายอื่น ขนาด input 96×160 ช่วยให้ใช้ทรัพยากรน้อย แต่ทำให้รายละเอียดขอบและพื้นที่แคบสูญหายได้
 
 <!-- RESULTS_END -->
 
 ## ไฟล์สำหรับส่งงาน
 
 แนบ repo นี้พร้อม README, model.py, dataset.py, prepare_data.py, train.py, inference.py, evaluate.py, common.py, report.py, requirements, tests, `runs/lane/best.pt`, history, กราฟ loss และ `run/test/{metrics.json,memory.json,snapshot.png,predictions.json}` สามารถอัปโหลด ZIP หรือ repo ไป GitHub/PSU storage เพื่อส่ง URL ได้ ภาพ dataset และ prediction masks จำนวนมากไม่จำเป็นต้องอยู่ใน Git แต่ควรเก็บ manifest และระบุที่มาข้อมูลให้ผู้ตรวจรันซ้ำได้ ห้ามอ้างกราฟ/metrics จาก run อื่นเป็นผลของ checkpoint นี้
+
+## ตัวอย่างงานที่เกี่ยวข้อง
 
 ตัวอย่างที่ผู้สอนให้ศึกษาประกอบ: [Ultrafast Lane Detection](https://github.com/ibaiGorordo/Ultrafast-Lane-Detection-Inference-Pytorch-) และ [YOLOTL](https://github.com/Highsky7/YOLOTL) โปรเจกต์นี้ใช้สถาปัตยกรรมที่เขียนเอง ไม่ใช้ weights ของตัวอย่างดังกล่าว
