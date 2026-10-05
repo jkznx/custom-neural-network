@@ -1,4 +1,6 @@
 # Assignment-10 — Custom U-Net Lane Segmentation from Scratch
+## Full-name & Code
+นายจักรชัย ปล้องไหม    6610110428
 
 สร้าง network **LaneNet-v1** แบบ residual U-Net สำหรับ single-class binary lane segmentation และเทรนใหม่ทุก layer บน PSU-reservoir Dataset-Assignment-8 ใช้เฉพาะ polygon label `lane` ไม่ใช้ bounding boxes, polylines, polygon `sideway` หรือ `track-line` มาสร้าง target ไม่มี pretrained weights และไม่มี frozen layers
 
