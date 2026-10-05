@@ -1,0 +1,6 @@
+torch>=2.6,<3
+numpy>=1.26,<3
+Pillow>=10,<13
+matplotlib>=3.8,<4
+psutil>=5.9,<8
+tensorboard>=2.16,<3

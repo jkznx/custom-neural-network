@@ -1,0 +1,13 @@
+{
+  "data_root": "data",
+  "output": "runs/lane",
+  "epochs": 30,
+  "batch_size": 4,
+  "height": 96,
+  "width": 160,
+  "base": 6,
+  "lr": 0.001,
+  "seed": 42,
+  "threads": 4,
+  "device": "cpu"
+}

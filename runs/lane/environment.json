@@ -1,0 +1,6 @@
+{
+  "torch": "2.14.1+cpu",
+  "device": "cpu",
+  "device_name": "CPU",
+  "parameters": 72859
+}

@@ -1,0 +1,4024 @@
+{
+  "summary": {
+    "num_images": 400,
+    "num_positive_images": 400,
+    "num_detected": 400,
+    "detection_rate": 1.0,
+    "iou_threshold": 0.6,
+    "avg_iou_detected": 0.9330731375425491,
+    "mean_image_iou": 0.9330731375425491,
+    "global_iou": 0.9330142988433411,
+    "dice": 0.9653465050947936,
+    "precision": 0.9657358407486947,
+    "recall": 0.9649574832351193,
+    "pixel_accuracy": 0.9649701470269098,
+    "tp": 179865125,
+    "fp": 6381587,
+    "fn": 6531818,
+    "tn": 175861470,
+    "resolution": "native image",
+    "empty_policy": "Both masks empty: IoU 1, excluded from positive-image detection rate"
+  },
+  "per_image": [
+    {
+      "image": "frame_0002_f52.jpg",
+      "iou": 0.9589545304038537,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448901,
+      "fp": 11795,
+      "fn": 7419,
+      "tn": 453485
+    },
+    {
+      "image": "frame_0003_f78.jpg",
+      "iou": 0.9597462696771326,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 449215,
+      "fp": 11113,
+      "fn": 7728,
+      "tn": 453544
+    },
+    {
+      "image": "frame_0004_f104.jpg",
+      "iou": 0.9567356372911335,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 447869,
+      "fp": 11963,
+      "fn": 8290,
+      "tn": 453478
+    },
+    {
+      "image": "frame_0005_f130.jpg",
+      "iou": 0.958461531841282,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 445468,
+      "fp": 13964,
+      "fn": 5342,
+      "tn": 456826
+    },
+    {
+      "image": "frame_0006_f156.jpg",
+      "iou": 0.9505931505011594,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 446409,
+      "fp": 16111,
+      "fn": 7091,
+      "tn": 451989
+    },
+    {
+      "image": "frame_0007_f182.jpg",
+      "iou": 0.9213203404133831,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 438882,
+      "fp": 15750,
+      "fn": 21730,
+      "tn": 445238
+    },
+    {
+      "image": "frame_0008_f207.jpg",
+      "iou": 0.9523234483264673,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 454244,
+      "fp": 15756,
+      "fn": 6985,
+      "tn": 444615
+    },
+    {
+      "image": "frame_0009_f233.jpg",
+      "iou": 0.949734474032605,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 445491,
+      "fp": 13933,
+      "fn": 9645,
+      "tn": 452531
+    },
+    {
+      "image": "frame_0010_f259.jpg",
+      "iou": 0.9456102748319116,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 457508,
+      "fp": 14076,
+      "fn": 12239,
+      "tn": 437777
+    },
+    {
+      "image": "frame_0011_f285.jpg",
+      "iou": 0.9461845162320338,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 450416,
+      "fp": 16968,
+      "fn": 8650,
+      "tn": 445566
+    },
+    {
+      "image": "frame_0012_f311.jpg",
+      "iou": 0.9451162414553379,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444095,
+      "fp": 10561,
+      "fn": 15228,
+      "tn": 451716
+    },
+    {
+      "image": "frame_0013_f337.jpg",
+      "iou": 0.9455740277159734,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448360,
+      "fp": 12704,
+      "fn": 13103,
+      "tn": 447433
+    },
+    {
+      "image": "frame_0014_f363.jpg",
+      "iou": 0.9444827214985466,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 438665,
+      "fp": 12463,
+      "fn": 13322,
+      "tn": 457150
+    },
+    {
+      "image": "frame_0015_f389.jpg",
+      "iou": 0.9514940375324963,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 452012,
+      "fp": 5940,
+      "fn": 17103,
+      "tn": 446545
+    },
+    {
+      "image": "frame_0016_f415.jpg",
+      "iou": 0.914038106161983,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 430320,
+      "fp": 18288,
+      "fn": 22182,
+      "tn": 450810
+    },
+    {
+      "image": "frame_0017_f441.jpg",
+      "iou": 0.9487390855640392,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 443101,
+      "fp": 11947,
+      "fn": 11994,
+      "tn": 454558
+    },
+    {
+      "image": "frame_0018_f467.jpg",
+      "iou": 0.9357585264813418,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 461707,
+      "fp": 17629,
+      "fn": 14068,
+      "tn": 428196
+    },
+    {
+      "image": "frame_0019_f493.jpg",
+      "iou": 0.9509419290259736,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459808,
+      "fp": 15904,
+      "fn": 7817,
+      "tn": 438071
+    },
+    {
+      "image": "frame_0020_f519.jpg",
+      "iou": 0.9310309964529745,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 442020,
+      "fp": 17324,
+      "fn": 15420,
+      "tn": 446836
+    },
+    {
+      "image": "frame_0021_f545.jpg",
+      "iou": 0.9282805836984588,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 443642,
+      "fp": 17342,
+      "fn": 16934,
+      "tn": 443682
+    },
+    {
+      "image": "frame_0022_f571.jpg",
+      "iou": 0.9362914257611512,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 453107,
+      "fp": 15157,
+      "fn": 15674,
+      "tn": 437662
+    },
+    {
+      "image": "frame_0023_f596.jpg",
+      "iou": 0.9361187109709488,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448223,
+      "fp": 17073,
+      "fn": 13514,
+      "tn": 442790
+    },
+    {
+      "image": "frame_0024_f622.jpg",
+      "iou": 0.9337327403080191,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 450104,
+      "fp": 18648,
+      "fn": 13296,
+      "tn": 439552
+    },
+    {
+      "image": "frame_0025_f648.jpg",
+      "iou": 0.9478808432212096,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456707,
+      "fp": 17541,
+      "fn": 7571,
+      "tn": 439781
+    },
+    {
+      "image": "frame_0026_f674.jpg",
+      "iou": 0.9322089717102706,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 455729,
+      "fp": 16711,
+      "fn": 16430,
+      "tn": 432730
+    },
+    {
+      "image": "frame_0027_f700.jpg",
+      "iou": 0.9358701607484364,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 452657,
+      "fp": 19167,
+      "fn": 11851,
+      "tn": 437925
+    },
+    {
+      "image": "frame_0028_f726.jpg",
+      "iou": 0.9431014506746482,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 468861,
+      "fp": 14339,
+      "fn": 13948,
+      "tn": 424452
+    },
+    {
+      "image": "frame_0029_f752.jpg",
+      "iou": 0.9590405305632967,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 449439,
+      "fp": 11009,
+      "fn": 8186,
+      "tn": 452966
+    },
+    {
+      "image": "frame_0030_f778.jpg",
+      "iou": 0.9403394272217794,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 450684,
+      "fp": 13444,
+      "fn": 15150,
+      "tn": 442322
+    },
+    {
+      "image": "frame_0031_f804.jpg",
+      "iou": 0.9307657221170076,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 442809,
+      "fp": 17527,
+      "fn": 15411,
+      "tn": 445853
+    },
+    {
+      "image": "frame_0032_f830.jpg",
+      "iou": 0.9400198676329434,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448538,
+      "fp": 18686,
+      "fn": 9934,
+      "tn": 444442
+    },
+    {
+      "image": "frame_0033_f856.jpg",
+      "iou": 0.9372660584185549,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448718,
+      "fp": 5834,
+      "fn": 24200,
+      "tn": 442848
+    },
+    {
+      "image": "frame_0034_f882.jpg",
+      "iou": 0.943454241700575,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 460250,
+      "fp": 14214,
+      "fn": 13371,
+      "tn": 433765
+    },
+    {
+      "image": "frame_0035_f908.jpg",
+      "iou": 0.9092391571899768,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 443265,
+      "fp": 15127,
+      "fn": 29120,
+      "tn": 434088
+    },
+    {
+      "image": "frame_0036_f934.jpg",
+      "iou": 0.9027940865892291,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 427473,
+      "fp": 13327,
+      "fn": 32700,
+      "tn": 448100
+    },
+    {
+      "image": "frame_0037_f960.jpg",
+      "iou": 0.9193322192093187,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 424133,
+      "fp": 16419,
+      "fn": 20797,
+      "tn": 460251
+    },
+    {
+      "image": "frame_0038_f986.jpg",
+      "iou": 0.9195082255284254,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 439547,
+      "fp": 16597,
+      "fn": 21880,
+      "tn": 443576
+    },
+    {
+      "image": "frame_0039_f1011.jpg",
+      "iou": 0.8844538123551556,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 421712,
+      "fp": 20896,
+      "fn": 34197,
+      "tn": 444795
+    },
+    {
+      "image": "frame_0040_f1037.jpg",
+      "iou": 0.8765226562357937,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 433827,
+      "fp": 13805,
+      "fn": 47309,
+      "tn": 426659
+    },
+    {
+      "image": "frame_0041_f1063.jpg",
+      "iou": 0.9224135558195127,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 435655,
+      "fp": 19449,
+      "fn": 17195,
+      "tn": 449301
+    },
+    {
+      "image": "frame_0042_f1089.jpg",
+      "iou": 0.9458897740015437,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 454658,
+      "fp": 4094,
+      "fn": 21915,
+      "tn": 440933
+    },
+    {
+      "image": "frame_0043_f1115.jpg",
+      "iou": 0.9394676099528357,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 450967,
+      "fp": 11473,
+      "fn": 17584,
+      "tn": 441576
+    },
+    {
+      "image": "frame_0044_f1141.jpg",
+      "iou": 0.9182170265381825,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 449279,
+      "fp": 16697,
+      "fn": 23319,
+      "tn": 432305
+    },
+    {
+      "image": "frame_0045_f1167.jpg",
+      "iou": 0.9554003781566873,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 451227,
+      "fp": 7741,
+      "fn": 13323,
+      "tn": 449309
+    },
+    {
+      "image": "frame_0046_f1193.jpg",
+      "iou": 0.9417327054071044,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456924,
+      "fp": 9948,
+      "fn": 18323,
+      "tn": 436405
+    },
+    {
+      "image": "frame_0047_f1219.jpg",
+      "iou": 0.9543281252288616,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456082,
+      "fp": 13630,
+      "fn": 8197,
+      "tn": 443691
+    },
+    {
+      "image": "frame_0048_f1245.jpg",
+      "iou": 0.9548041856263383,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456595,
+      "fp": 14445,
+      "fn": 7168,
+      "tn": 443392
+    },
+    {
+      "image": "frame_0049_f1271.jpg",
+      "iou": 0.9531931140676594,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 454370,
+      "fp": 8926,
+      "fn": 13386,
+      "tn": 444918
+    },
+    {
+      "image": "frame_0050_f1297.jpg",
+      "iou": 0.9236942104395535,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 437057,
+      "fp": 16031,
+      "fn": 20074,
+      "tn": 448438
+    },
+    {
+      "image": "frame_0051_f1323.jpg",
+      "iou": 0.9406211312700107,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 440681,
+      "fp": 12135,
+      "fn": 15684,
+      "tn": 453100
+    },
+    {
+      "image": "frame_0052_f1349.jpg",
+      "iou": 0.9544028741746458,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 452135,
+      "fp": 8465,
+      "fn": 13136,
+      "tn": 447864
+    },
+    {
+      "image": "frame_0053_f1375.jpg",
+      "iou": 0.9363141699266984,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 453074,
+      "fp": 14662,
+      "fn": 16155,
+      "tn": 437709
+    },
+    {
+      "image": "frame_0054_f1400.jpg",
+      "iou": 0.9613168826031055,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 466554,
+      "fp": 7326,
+      "fn": 11448,
+      "tn": 436272
+    },
+    {
+      "image": "frame_0055_f1426.jpg",
+      "iou": 0.9374564881017553,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 453788,
+      "fp": 15156,
+      "fn": 15119,
+      "tn": 437537
+    },
+    {
+      "image": "frame_0056_f1452.jpg",
+      "iou": 0.9458102841271152,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 446762,
+      "fp": 10262,
+      "fn": 15335,
+      "tn": 449241
+    },
+    {
+      "image": "frame_0057_f1478.jpg",
+      "iou": 0.9439381420929204,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 452422,
+      "fp": 14946,
+      "fn": 11924,
+      "tn": 442308
+    },
+    {
+      "image": "frame_0058_f1504.jpg",
+      "iou": 0.9450690191919537,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 442005,
+      "fp": 11619,
+      "fn": 14072,
+      "tn": 453904
+    },
+    {
+      "image": "frame_0059_f1530.jpg",
+      "iou": 0.943326789395824,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 440627,
+      "fp": 16685,
+      "fn": 9787,
+      "tn": 454501
+    },
+    {
+      "image": "frame_0060_f1556.jpg",
+      "iou": 0.9573975348658676,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448962,
+      "fp": 15246,
+      "fn": 4732,
+      "tn": 452660
+    },
+    {
+      "image": "frame_0061_f1582.jpg",
+      "iou": 0.929141409382623,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 443744,
+      "fp": 16048,
+      "fn": 17793,
+      "tn": 444015
+    },
+    {
+      "image": "frame_0062_f1608.jpg",
+      "iou": 0.9293752847357037,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 452879,
+      "fp": 16809,
+      "fn": 17606,
+      "tn": 434306
+    },
+    {
+      "image": "frame_0063_f1634.jpg",
+      "iou": 0.9426872967542824,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 455120,
+      "fp": 17032,
+      "fn": 10638,
+      "tn": 438810
+    },
+    {
+      "image": "frame_0064_f1660.jpg",
+      "iou": 0.9497486705639887,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456680,
+      "fp": 19152,
+      "fn": 5011,
+      "tn": 440757
+    },
+    {
+      "image": "frame_0065_f1686.jpg",
+      "iou": 0.9392111506650073,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 442978,
+      "fp": 15814,
+      "fn": 12857,
+      "tn": 449951
+    },
+    {
+      "image": "frame_0066_f1712.jpg",
+      "iou": 0.9429114058355438,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444347,
+      "fp": 10013,
+      "fn": 16890,
+      "tn": 450350
+    },
+    {
+      "image": "frame_0067_f1738.jpg",
+      "iou": 0.934414404327155,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 433957,
+      "fp": 14387,
+      "fn": 16072,
+      "tn": 457184
+    },
+    {
+      "image": "frame_0068_f1764.jpg",
+      "iou": 0.9417490677151005,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 446487,
+      "fp": 11265,
+      "fn": 16352,
+      "tn": 447496
+    },
+    {
+      "image": "frame_0069_f1789.jpg",
+      "iou": 0.9542697702043064,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 462734,
+      "fp": 16274,
+      "fn": 5901,
+      "tn": 436691
+    },
+    {
+      "image": "frame_0070_f1815.jpg",
+      "iou": 0.9447581715270195,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 434311,
+      "fp": 4865,
+      "fn": 20530,
+      "tn": 461894
+    },
+    {
+      "image": "frame_0071_f1841.jpg",
+      "iou": 0.9398766884815928,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 446495,
+      "fp": 15161,
+      "fn": 13401,
+      "tn": 446543
+    },
+    {
+      "image": "frame_0072_f1867.jpg",
+      "iou": 0.9468402130628291,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 464837,
+      "fp": 15923,
+      "fn": 10175,
+      "tn": 430665
+    },
+    {
+      "image": "frame_0073_f1893.jpg",
+      "iou": 0.9277352725911049,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 436043,
+      "fp": 15317,
+      "fn": 18648,
+      "tn": 451592
+    },
+    {
+      "image": "frame_0074_f1919.jpg",
+      "iou": 0.9225831838337338,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 436094,
+      "fp": 15026,
+      "fn": 21568,
+      "tn": 448912
+    },
+    {
+      "image": "frame_0075_f1945.jpg",
+      "iou": 0.9344572581928428,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 446308,
+      "fp": 16668,
+      "fn": 14636,
+      "tn": 443988
+    },
+    {
+      "image": "frame_0076_f1971.jpg",
+      "iou": 0.9240116300710957,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 446828,
+      "fp": 15964,
+      "fn": 20782,
+      "tn": 438026
+    },
+    {
+      "image": "frame_0077_f1997.jpg",
+      "iou": 0.9376641887274315,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448662,
+      "fp": 17922,
+      "fn": 11905,
+      "tn": 443111
+    },
+    {
+      "image": "frame_0078_f2023.jpg",
+      "iou": 0.9375407855375292,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 435318,
+      "fp": 13770,
+      "fn": 15231,
+      "tn": 457281
+    },
+    {
+      "image": "frame_0079_f2049.jpg",
+      "iou": 0.9552026602655104,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444089,
+      "fp": 10143,
+      "fn": 10684,
+      "tn": 456684
+    },
+    {
+      "image": "frame_0080_f2075.jpg",
+      "iou": 0.9335990096859662,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 429885,
+      "fp": 15051,
+      "fn": 15524,
+      "tn": 461140
+    },
+    {
+      "image": "frame_0081_f2101.jpg",
+      "iou": 0.9159323434754115,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 438847,
+      "fp": 18321,
+      "fn": 21958,
+      "tn": 442474
+    },
+    {
+      "image": "frame_0082_f2127.jpg",
+      "iou": 0.9415057906810832,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 440781,
+      "fp": 11115,
+      "fn": 16270,
+      "tn": 453434
+    },
+    {
+      "image": "frame_0083_f2153.jpg",
+      "iou": 0.9193297357980277,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 432381,
+      "fp": 15683,
+      "fn": 22258,
+      "tn": 451278
+    },
+    {
+      "image": "frame_0084_f2179.jpg",
+      "iou": 0.9566191006336964,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 451970,
+      "fp": 10006,
+      "fn": 10490,
+      "tn": 449134
+    },
+    {
+      "image": "frame_0085_f2204.jpg",
+      "iou": 0.9464133000376287,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 442664,
+      "fp": 16856,
+      "fn": 8208,
+      "tn": 453872
+    },
+    {
+      "image": "frame_0086_f2230.jpg",
+      "iou": 0.9485564304461942,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 435487,
+      "fp": 10321,
+      "fn": 13297,
+      "tn": 462495
+    },
+    {
+      "image": "frame_0087_f2256.jpg",
+      "iou": 0.9450527739238861,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 430498,
+      "fp": 9318,
+      "fn": 15712,
+      "tn": 466072
+    },
+    {
+      "image": "frame_0088_f2282.jpg",
+      "iou": 0.9598668488643943,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444642,
+      "fp": 8230,
+      "fn": 10361,
+      "tn": 458367
+    },
+    {
+      "image": "frame_0089_f2308.jpg",
+      "iou": 0.9446226806874396,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 439003,
+      "fp": 7829,
+      "fn": 17907,
+      "tn": 456861
+    },
+    {
+      "image": "frame_0090_f2334.jpg",
+      "iou": 0.937499866966648,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 440444,
+      "fp": 12508,
+      "fn": 16855,
+      "tn": 451793
+    },
+    {
+      "image": "frame_0091_f2360.jpg",
+      "iou": 0.930889102358843,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 436075,
+      "fp": 10701,
+      "fn": 21674,
+      "tn": 453150
+    },
+    {
+      "image": "frame_0092_f2386.jpg",
+      "iou": 0.9252081200706347,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 443777,
+      "fp": 16951,
+      "fn": 18923,
+      "tn": 441949
+    },
+    {
+      "image": "frame_0093_f2412.jpg",
+      "iou": 0.9390231743582186,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 433239,
+      "fp": 13585,
+      "fn": 14548,
+      "tn": 460228
+    },
+    {
+      "image": "frame_0094_f2438.jpg",
+      "iou": 0.9418086037430995,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 447668,
+      "fp": 16308,
+      "fn": 11352,
+      "tn": 446272
+    },
+    {
+      "image": "frame_0095_f2464.jpg",
+      "iou": 0.8845314268915868,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 424254,
+      "fp": 23874,
+      "fn": 31509,
+      "tn": 441963
+    },
+    {
+      "image": "frame_0096_f2490.jpg",
+      "iou": 0.9079954506209736,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 437494,
+      "fp": 18194,
+      "fn": 26136,
+      "tn": 439776
+    },
+    {
+      "image": "frame_0097_f2516.jpg",
+      "iou": 0.9441661160682785,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 441561,
+      "fp": 5727,
+      "fn": 20385,
+      "tn": 453927
+    },
+    {
+      "image": "frame_0098_f2542.jpg",
+      "iou": 0.9072867163579262,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 437960,
+      "fp": 15400,
+      "fn": 29354,
+      "tn": 438886
+    },
+    {
+      "image": "frame_0099_f2568.jpg",
+      "iou": 0.9245981289523986,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 439210,
+      "fp": 8910,
+      "fn": 26908,
+      "tn": 446572
+    },
+    {
+      "image": "frame_0100_f2593.jpg",
+      "iou": 0.9145985341076421,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 442234,
+      "fp": 17582,
+      "fn": 23712,
+      "tn": 438072
+    },
+    {
+      "image": "frame_0101_f2619.jpg",
+      "iou": 0.9072133231733406,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 445273,
+      "fp": 19399,
+      "fn": 26142,
+      "tn": 430786
+    },
+    {
+      "image": "frame_0102_f2645.jpg",
+      "iou": 0.9199541033766802,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 437762,
+      "fp": 14134,
+      "fn": 23956,
+      "tn": 445748
+    },
+    {
+      "image": "frame_0103_f2671.jpg",
+      "iou": 0.9269756084821895,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 425949,
+      "fp": 12387,
+      "fn": 21168,
+      "tn": 462096
+    },
+    {
+      "image": "frame_0104_f2697.jpg",
+      "iou": 0.9290348380524291,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 415849,
+      "fp": 7423,
+      "fn": 24342,
+      "tn": 473986
+    },
+    {
+      "image": "frame_0105_f2723.jpg",
+      "iou": 0.9366787501502527,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444174,
+      "fp": 17170,
+      "fn": 12857,
+      "tn": 447399
+    },
+    {
+      "image": "frame_0106_f2749.jpg",
+      "iou": 0.9412725578799184,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 458684,
+      "fp": 15404,
+      "fn": 13214,
+      "tn": 434298
+    },
+    {
+      "image": "frame_0107_f2775.jpg",
+      "iou": 0.9200430460400839,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 431744,
+      "fp": 14912,
+      "fn": 22609,
+      "tn": 452335
+    },
+    {
+      "image": "frame_0108_f2801.jpg",
+      "iou": 0.9425295452265543,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 441593,
+      "fp": 5575,
+      "fn": 21351,
+      "tn": 453081
+    },
+    {
+      "image": "frame_0109_f2827.jpg",
+      "iou": 0.8989946023824688,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 430542,
+      "fp": 16786,
+      "fn": 31587,
+      "tn": 442685
+    },
+    {
+      "image": "frame_0110_f2853.jpg",
+      "iou": 0.9527062768217458,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 446663,
+      "fp": 10657,
+      "fn": 11516,
+      "tn": 452764
+    },
+    {
+      "image": "frame_0111_f2879.jpg",
+      "iou": 0.9437097911903932,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444174,
+      "fp": 11498,
+      "fn": 14996,
+      "tn": 450932
+    },
+    {
+      "image": "frame_0112_f2905.jpg",
+      "iou": 0.9033976227853779,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 435051,
+      "fp": 14973,
+      "fn": 31548,
+      "tn": 440028
+    },
+    {
+      "image": "frame_0113_f2931.jpg",
+      "iou": 0.9080623185830223,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444541,
+      "fp": 17179,
+      "fn": 27829,
+      "tn": 432051
+    },
+    {
+      "image": "frame_0114_f2957.jpg",
+      "iou": 0.928710266220815,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 439097,
+      "fp": 15231,
+      "fn": 18475,
+      "tn": 448797
+    },
+    {
+      "image": "frame_0115_f2982.jpg",
+      "iou": 0.9125282022902388,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 428724,
+      "fp": 14492,
+      "fn": 26604,
+      "tn": 451780
+    },
+    {
+      "image": "frame_0116_f3008.jpg",
+      "iou": 0.9294008883599345,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 437311,
+      "fp": 12937,
+      "fn": 20282,
+      "tn": 451070
+    },
+    {
+      "image": "frame_0117_f3034.jpg",
+      "iou": 0.9251415198372828,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 453027,
+      "fp": 17717,
+      "fn": 18940,
+      "tn": 431916
+    },
+    {
+      "image": "frame_0118_f3060.jpg",
+      "iou": 0.9376135533934423,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 441751,
+      "fp": 17913,
+      "fn": 11480,
+      "tn": 450456
+    },
+    {
+      "image": "frame_0119_f3086.jpg",
+      "iou": 0.9255242090411494,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 440817,
+      "fp": 20607,
+      "fn": 14865,
+      "tn": 445311
+    },
+    {
+      "image": "frame_0120_f3112.jpg",
+      "iou": 0.9357769570693594,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 438346,
+      "fp": 16662,
+      "fn": 13422,
+      "tn": 453170
+    },
+    {
+      "image": "frame_0121_f3138.jpg",
+      "iou": 0.9273654773465143,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 445026,
+      "fp": 17022,
+      "fn": 17834,
+      "tn": 441718
+    },
+    {
+      "image": "frame_0122_f3164.jpg",
+      "iou": 0.9590784570621566,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 450928,
+      "fp": 9928,
+      "fn": 9312,
+      "tn": 451432
+    },
+    {
+      "image": "frame_0123_f3190.jpg",
+      "iou": 0.9253482344982995,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 445954,
+      "fp": 18022,
+      "fn": 17955,
+      "tn": 439669
+    },
+    {
+      "image": "frame_0124_f3216.jpg",
+      "iou": 0.9433080167027593,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 455198,
+      "fp": 12618,
+      "fn": 14739,
+      "tn": 439045
+    },
+    {
+      "image": "frame_0125_f3242.jpg",
+      "iou": 0.9247435849735214,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 447378,
+      "fp": 18558,
+      "fn": 17850,
+      "tn": 437814
+    },
+    {
+      "image": "frame_0126_f3268.jpg",
+      "iou": 0.9460479862275564,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444021,
+      "fp": 6339,
+      "fn": 18983,
+      "tn": 452257
+    },
+    {
+      "image": "frame_0127_f3294.jpg",
+      "iou": 0.9408059001184104,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 424279,
+      "fp": 12897,
+      "fn": 13798,
+      "tn": 470626
+    },
+    {
+      "image": "frame_0128_f3320.jpg",
+      "iou": 0.9295539643686807,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 447359,
+      "fp": 18937,
+      "fn": 14966,
+      "tn": 440338
+    },
+    {
+      "image": "frame_0129_f3346.jpg",
+      "iou": 0.8962519653926257,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 435496,
+      "fp": 30888,
+      "fn": 19524,
+      "tn": 435692
+    },
+    {
+      "image": "frame_0130_f3372.jpg",
+      "iou": 0.9545666123262719,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 449115,
+      "fp": 12021,
+      "fn": 9355,
+      "tn": 451109
+    },
+    {
+      "image": "frame_0131_f3397.jpg",
+      "iou": 0.9586753050671747,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 455899,
+      "fp": 14549,
+      "fn": 5103,
+      "tn": 446049
+    },
+    {
+      "image": "frame_0132_f3423.jpg",
+      "iou": 0.9364398347174641,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 437618,
+      "fp": 12030,
+      "fn": 17673,
+      "tn": 454279
+    },
+    {
+      "image": "frame_0133_f3449.jpg",
+      "iou": 0.9099424470005073,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 437635,
+      "fp": 16845,
+      "fn": 26468,
+      "tn": 440652
+    },
+    {
+      "image": "frame_0134_f3475.jpg",
+      "iou": 0.9353092584435728,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448044,
+      "fp": 16892,
+      "fn": 14097,
+      "tn": 442567
+    },
+    {
+      "image": "frame_0135_f3501.jpg",
+      "iou": 0.9484766821433597,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 438182,
+      "fp": 17322,
+      "fn": 6481,
+      "tn": 459615
+    },
+    {
+      "image": "frame_0136_f3527.jpg",
+      "iou": 0.9518487246041426,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456559,
+      "fp": 18353,
+      "fn": 4743,
+      "tn": 441945
+    },
+    {
+      "image": "frame_0137_f3553.jpg",
+      "iou": 0.9349656442528451,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 452845,
+      "fp": 15683,
+      "fn": 15816,
+      "tn": 437256
+    },
+    {
+      "image": "frame_0138_f3579.jpg",
+      "iou": 0.9293189705870172,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448783,
+      "fp": 15161,
+      "fn": 18972,
+      "tn": 438684
+    },
+    {
+      "image": "frame_0139_f3605.jpg",
+      "iou": 0.9422908672707144,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 438349,
+      "fp": 9131,
+      "fn": 17715,
+      "tn": 456405
+    },
+    {
+      "image": "frame_0140_f3631.jpg",
+      "iou": 0.9430006305239986,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 426241,
+      "fp": 11055,
+      "fn": 14709,
+      "tn": 469595
+    },
+    {
+      "image": "frame_0141_f3657.jpg",
+      "iou": 0.9232404210096317,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 433935,
+      "fp": 18777,
+      "fn": 17301,
+      "tn": 451587
+    },
+    {
+      "image": "frame_0142_f3683.jpg",
+      "iou": 0.9356387521217936,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 443722,
+      "fp": 17254,
+      "fn": 13269,
+      "tn": 447355
+    },
+    {
+      "image": "frame_0143_f3709.jpg",
+      "iou": 0.9509704305983695,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 442691,
+      "fp": 16413,
+      "fn": 6411,
+      "tn": 456085
+    },
+    {
+      "image": "frame_0144_f3735.jpg",
+      "iou": 0.931547769095034,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 443454,
+      "fp": 9874,
+      "fn": 22712,
+      "tn": 445560
+    },
+    {
+      "image": "frame_0145_f3761.jpg",
+      "iou": 0.9527180869983791,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 447304,
+      "fp": 10432,
+      "fn": 11767,
+      "tn": 452097
+    },
+    {
+      "image": "frame_0146_f3786.jpg",
+      "iou": 0.9205077823527694,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 441308,
+      "fp": 14300,
+      "fn": 23810,
+      "tn": 442182
+    },
+    {
+      "image": "frame_0147_f3812.jpg",
+      "iou": 0.9292090047770367,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 443885,
+      "fp": 16883,
+      "fn": 16934,
+      "tn": 443898
+    },
+    {
+      "image": "frame_0148_f3838.jpg",
+      "iou": 0.9361271216125848,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 440958,
+      "fp": 10746,
+      "fn": 19341,
+      "tn": 450555
+    },
+    {
+      "image": "frame_0149_f3864.jpg",
+      "iou": 0.9426834769318863,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 457670,
+      "fp": 6866,
+      "fn": 20961,
+      "tn": 436103
+    },
+    {
+      "image": "frame_0150_f3890.jpg",
+      "iou": 0.9400715937556194,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 449593,
+      "fp": 14263,
+      "fn": 14398,
+      "tn": 443346
+    },
+    {
+      "image": "frame_0151_f3916.jpg",
+      "iou": 0.9427633053426641,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 450095,
+      "fp": 16353,
+      "fn": 10973,
+      "tn": 444179
+    },
+    {
+      "image": "frame_0152_f3942.jpg",
+      "iou": 0.920908786438136,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 437195,
+      "fp": 15461,
+      "fn": 22087,
+      "tn": 446857
+    },
+    {
+      "image": "frame_0153_f3968.jpg",
+      "iou": 0.9140944755413953,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 449580,
+      "fp": 17004,
+      "fn": 25247,
+      "tn": 429769
+    },
+    {
+      "image": "frame_0154_f3994.jpg",
+      "iou": 0.9298820160911598,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 449478,
+      "fp": 16138,
+      "fn": 17755,
+      "tn": 438229
+    },
+    {
+      "image": "frame_0155_f4020.jpg",
+      "iou": 0.9495329452890545,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 460683,
+      "fp": 13453,
+      "fn": 11032,
+      "tn": 436432
+    },
+    {
+      "image": "frame_0156_f4046.jpg",
+      "iou": 0.9311856318772589,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 462478,
+      "fp": 13466,
+      "fn": 20711,
+      "tn": 424945
+    },
+    {
+      "image": "frame_0157_f4072.jpg",
+      "iou": 0.9424510947226648,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459034,
+      "fp": 11878,
+      "fn": 16152,
+      "tn": 434536
+    },
+    {
+      "image": "frame_0158_f4098.jpg",
+      "iou": 0.9226977304944111,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448480,
+      "fp": 15256,
+      "fn": 22317,
+      "tn": 435547
+    },
+    {
+      "image": "frame_0159_f4124.jpg",
+      "iou": 0.8999027825433393,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 440614,
+      "fp": 15698,
+      "fn": 33312,
+      "tn": 431976
+    },
+    {
+      "image": "frame_0160_f4150.jpg",
+      "iou": 0.8642634473553041,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 409208,
+      "fp": 12176,
+      "fn": 52092,
+      "tn": 448124
+    },
+    {
+      "image": "frame_0161_f4175.jpg",
+      "iou": 0.9100292302420907,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 430260,
+      "fp": 14732,
+      "fn": 27806,
+      "tn": 448802
+    },
+    {
+      "image": "frame_0162_f4201.jpg",
+      "iou": 0.9064661491078262,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 434704,
+      "fp": 14896,
+      "fn": 29959,
+      "tn": 442041
+    },
+    {
+      "image": "frame_0163_f4227.jpg",
+      "iou": 0.9103697965642514,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 439532,
+      "fp": 15916,
+      "fn": 27358,
+      "tn": 438794
+    },
+    {
+      "image": "frame_0164_f4253.jpg",
+      "iou": 0.9127911174918978,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 429795,
+      "fp": 16333,
+      "fn": 24730,
+      "tn": 450742
+    },
+    {
+      "image": "frame_0165_f4279.jpg",
+      "iou": 0.9326239109605122,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 440925,
+      "fp": 9251,
+      "fn": 22603,
+      "tn": 448821
+    },
+    {
+      "image": "frame_0166_f4305.jpg",
+      "iou": 0.93127434960313,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 447956,
+      "fp": 9580,
+      "fn": 23478,
+      "tn": 440586
+    },
+    {
+      "image": "frame_0167_f4331.jpg",
+      "iou": 0.9421105730861813,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 437958,
+      "fp": 11714,
+      "fn": 15197,
+      "tn": 456731
+    },
+    {
+      "image": "frame_0168_f4357.jpg",
+      "iou": 0.9204584932679191,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 434519,
+      "fp": 17305,
+      "fn": 20244,
+      "tn": 449532
+    },
+    {
+      "image": "frame_0169_f4383.jpg",
+      "iou": 0.9338712355291444,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 433108,
+      "fp": 11700,
+      "fn": 18969,
+      "tn": 457823
+    },
+    {
+      "image": "frame_0170_f4409.jpg",
+      "iou": 0.934539749915399,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 447381,
+      "fp": 9987,
+      "fn": 21350,
+      "tn": 442882
+    },
+    {
+      "image": "frame_0171_f4435.jpg",
+      "iou": 0.889108267519744,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 426900,
+      "fp": 8708,
+      "fn": 44536,
+      "tn": 441456
+    },
+    {
+      "image": "frame_0172_f4461.jpg",
+      "iou": 0.942663537570299,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 445861,
+      "fp": 14883,
+      "fn": 12236,
+      "tn": 448620
+    },
+    {
+      "image": "frame_0173_f4487.jpg",
+      "iou": 0.9103047085466508,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 424070,
+      "fp": 15578,
+      "fn": 26207,
+      "tn": 455745
+    },
+    {
+      "image": "frame_0174_f4513.jpg",
+      "iou": 0.897884129251797,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444344,
+      "fp": 15720,
+      "fn": 34815,
+      "tn": 426721
+    },
+    {
+      "image": "frame_0175_f4539.jpg",
+      "iou": 0.940570489592989,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 446470,
+      "fp": 9978,
+      "fn": 18232,
+      "tn": 446920
+    },
+    {
+      "image": "frame_0176_f4564.jpg",
+      "iou": 0.9148620900879137,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 424163,
+      "fp": 9029,
+      "fn": 30444,
+      "tn": 457964
+    },
+    {
+      "image": "frame_0177_f4590.jpg",
+      "iou": 0.9446552665168231,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 439618,
+      "fp": 6902,
+      "fn": 18854,
+      "tn": 456226
+    },
+    {
+      "image": "frame_0178_f4616.jpg",
+      "iou": 0.9098251046166307,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 431359,
+      "fp": 9145,
+      "fn": 33608,
+      "tn": 447488
+    },
+    {
+      "image": "frame_0179_f4642.jpg",
+      "iou": 0.929845749283776,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 442707,
+      "fp": 10781,
+      "fn": 22620,
+      "tn": 445492
+    },
+    {
+      "image": "frame_0180_f4668.jpg",
+      "iou": 0.9371404673710804,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 439204,
+      "fp": 13076,
+      "fn": 16384,
+      "tn": 452936
+    },
+    {
+      "image": "frame_0181_f4694.jpg",
+      "iou": 0.9443256159816855,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 452094,
+      "fp": 10858,
+      "fn": 15796,
+      "tn": 442852
+    },
+    {
+      "image": "frame_0182_f4720.jpg",
+      "iou": 0.9102412908017319,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 446122,
+      "fp": 15150,
+      "fn": 28842,
+      "tn": 431486
+    },
+    {
+      "image": "frame_0183_f4746.jpg",
+      "iou": 0.9319380469469066,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 446526,
+      "fp": 13194,
+      "fn": 19417,
+      "tn": 442463
+    },
+    {
+      "image": "frame_0184_f4772.jpg",
+      "iou": 0.9302921327180875,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 455031,
+      "fp": 11873,
+      "fn": 22223,
+      "tn": 432473
+    },
+    {
+      "image": "frame_0185_f4798.jpg",
+      "iou": 0.9223288144116807,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 432836,
+      "fp": 9980,
+      "fn": 26470,
+      "tn": 452314
+    },
+    {
+      "image": "frame_0186_f4824.jpg",
+      "iou": 0.8936217455295968,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 422583,
+      "fp": 10225,
+      "fn": 40080,
+      "tn": 448712
+    },
+    {
+      "image": "frame_0187_f4850.jpg",
+      "iou": 0.9468622674456205,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 439221,
+      "fp": 11867,
+      "fn": 12782,
+      "tn": 457730
+    },
+    {
+      "image": "frame_0188_f4876.jpg",
+      "iou": 0.955881057032014,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444738,
+      "fp": 11966,
+      "fn": 8561,
+      "tn": 456335
+    },
+    {
+      "image": "frame_0189_f4902.jpg",
+      "iou": 0.9203465422017416,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 434595,
+      "fp": 14781,
+      "fn": 22832,
+      "tn": 449392
+    },
+    {
+      "image": "frame_0190_f4928.jpg",
+      "iou": 0.9171662688448702,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 443803,
+      "fp": 16725,
+      "fn": 23357,
+      "tn": 437715
+    },
+    {
+      "image": "frame_0191_f4954.jpg",
+      "iou": 0.9170586203777557,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 446105,
+      "fp": 16543,
+      "fn": 23804,
+      "tn": 435148
+    },
+    {
+      "image": "frame_0192_f4979.jpg",
+      "iou": 0.9339038788842883,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 445008,
+      "fp": 16672,
+      "fn": 14823,
+      "tn": 445097
+    },
+    {
+      "image": "frame_0193_f5005.jpg",
+      "iou": 0.9182051200238239,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 431662,
+      "fp": 13458,
+      "fn": 24995,
+      "tn": 451485
+    },
+    {
+      "image": "frame_0194_f5031.jpg",
+      "iou": 0.9152122443305023,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 441060,
+      "fp": 16436,
+      "fn": 24425,
+      "tn": 439679
+    },
+    {
+      "image": "frame_0195_f5057.jpg",
+      "iou": 0.9180051631163012,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 476150,
+      "fp": 15442,
+      "fn": 27087,
+      "tn": 402921
+    },
+    {
+      "image": "frame_0196_f5083.jpg",
+      "iou": 0.945524291239852,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444907,
+      "fp": 16949,
+      "fn": 8684,
+      "tn": 451060
+    },
+    {
+      "image": "frame_0197_f5109.jpg",
+      "iou": 0.9379379633986595,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 442506,
+      "fp": 17286,
+      "fn": 11994,
+      "tn": 449814
+    },
+    {
+      "image": "frame_0198_f5135.jpg",
+      "iou": 0.9138163788254411,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 438641,
+      "fp": 16479,
+      "fn": 24890,
+      "tn": 441590
+    },
+    {
+      "image": "frame_0199_f5161.jpg",
+      "iou": 0.9146179856948731,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 434128,
+      "fp": 16864,
+      "fn": 23663,
+      "tn": 446945
+    },
+    {
+      "image": "frame_0200_f5187.jpg",
+      "iou": 0.9163345458761467,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 442596,
+      "fp": 17380,
+      "fn": 23031,
+      "tn": 438593
+    },
+    {
+      "image": "frame_0201_f5213.jpg",
+      "iou": 0.918278675359227,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 445940,
+      "fp": 16028,
+      "fn": 23658,
+      "tn": 435974
+    },
+    {
+      "image": "frame_0202_f5239.jpg",
+      "iou": 0.9333503991063741,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 441177,
+      "fp": 17623,
+      "fn": 13881,
+      "tn": 448919
+    },
+    {
+      "image": "frame_0203_f5265.jpg",
+      "iou": 0.9346915595939519,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 447678,
+      "fp": 17234,
+      "fn": 14046,
+      "tn": 442642
+    },
+    {
+      "image": "frame_0204_f5291.jpg",
+      "iou": 0.9387686944905392,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 449750,
+      "fp": 17858,
+      "fn": 11477,
+      "tn": 442515
+    },
+    {
+      "image": "frame_0205_f5317.jpg",
+      "iou": 0.9298597277556441,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448118,
+      "fp": 17034,
+      "fn": 16768,
+      "tn": 439680
+    },
+    {
+      "image": "frame_0206_f5343.jpg",
+      "iou": 0.9329878769777138,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456065,
+      "fp": 17255,
+      "fn": 15502,
+      "tn": 432778
+    },
+    {
+      "image": "frame_0207_f5368.jpg",
+      "iou": 0.9395446453362079,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 460204,
+      "fp": 17412,
+      "fn": 12200,
+      "tn": 431784
+    },
+    {
+      "image": "frame_0208_f5394.jpg",
+      "iou": 0.9228359003785549,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 447090,
+      "fp": 16830,
+      "fn": 20554,
+      "tn": 437126
+    },
+    {
+      "image": "frame_0209_f5420.jpg",
+      "iou": 0.9351770033104883,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 442378,
+      "fp": 16446,
+      "fn": 14218,
+      "tn": 448558
+    },
+    {
+      "image": "frame_0210_f5446.jpg",
+      "iou": 0.9394808253545646,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 458725,
+      "fp": 16443,
+      "fn": 13107,
+      "tn": 433325
+    },
+    {
+      "image": "frame_0211_f5472.jpg",
+      "iou": 0.9394693998836513,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448948,
+      "fp": 17012,
+      "fn": 11914,
+      "tn": 443726
+    },
+    {
+      "image": "frame_0212_f5498.jpg",
+      "iou": 0.94383815591355,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 450073,
+      "fp": 17295,
+      "fn": 9486,
+      "tn": 444746
+    },
+    {
+      "image": "frame_0213_f5524.jpg",
+      "iou": 0.940009104286425,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 443971,
+      "fp": 17837,
+      "fn": 10497,
+      "tn": 449295
+    },
+    {
+      "image": "frame_0214_f5550.jpg",
+      "iou": 0.929693602631799,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 455839,
+      "fp": 16489,
+      "fn": 17983,
+      "tn": 431289
+    },
+    {
+      "image": "frame_0215_f5576.jpg",
+      "iou": 0.9375255621555069,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 442408,
+      "fp": 16816,
+      "fn": 12665,
+      "tn": 449711
+    },
+    {
+      "image": "frame_0216_f5602.jpg",
+      "iou": 0.9499319310012784,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 457738,
+      "fp": 16702,
+      "fn": 7424,
+      "tn": 439736
+    },
+    {
+      "image": "frame_0217_f5628.jpg",
+      "iou": 0.9302328386533877,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 462722,
+      "fp": 16094,
+      "fn": 18610,
+      "tn": 424174
+    },
+    {
+      "image": "frame_0218_f5654.jpg",
+      "iou": 0.9393140440924463,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 454953,
+      "fp": 16295,
+      "fn": 13098,
+      "tn": 437254
+    },
+    {
+      "image": "frame_0219_f5680.jpg",
+      "iou": 0.9284708155569177,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 457452,
+      "fp": 16684,
+      "fn": 18558,
+      "tn": 428906
+    },
+    {
+      "image": "frame_0220_f5706.jpg",
+      "iou": 0.9427467777541879,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 457367,
+      "fp": 17329,
+      "fn": 10447,
+      "tn": 436457
+    },
+    {
+      "image": "frame_0221_f5732.jpg",
+      "iou": 0.937366934653078,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 450402,
+      "fp": 16518,
+      "fn": 13577,
+      "tn": 441103
+    },
+    {
+      "image": "frame_0222_f5757.jpg",
+      "iou": 0.9396086013469053,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 462652,
+      "fp": 16596,
+      "fn": 13140,
+      "tn": 429212
+    },
+    {
+      "image": "frame_0223_f5783.jpg",
+      "iou": 0.9525127825549397,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 460699,
+      "fp": 16453,
+      "fn": 6515,
+      "tn": 437933
+    },
+    {
+      "image": "frame_0224_f5809.jpg",
+      "iou": 0.9455270401639396,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 450329,
+      "fp": 17447,
+      "fn": 8497,
+      "tn": 445327
+    },
+    {
+      "image": "frame_0225_f5835.jpg",
+      "iou": 0.9354138930896463,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 434221,
+      "fp": 21635,
+      "fn": 8346,
+      "tn": 457398
+    },
+    {
+      "image": "frame_0226_f5861.jpg",
+      "iou": 0.9466392527904157,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 452131,
+      "fp": 17949,
+      "fn": 7537,
+      "tn": 443983
+    },
+    {
+      "image": "frame_0227_f5887.jpg",
+      "iou": 0.9295681283351562,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448736,
+      "fp": 16288,
+      "fn": 17712,
+      "tn": 438864
+    },
+    {
+      "image": "frame_0228_f5913.jpg",
+      "iou": 0.9478553562820796,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 458162,
+      "fp": 17062,
+      "fn": 8143,
+      "tn": 438233
+    },
+    {
+      "image": "frame_0229_f5939.jpg",
+      "iou": 0.9427488895810489,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 441906,
+      "fp": 18286,
+      "fn": 8550,
+      "tn": 452858
+    },
+    {
+      "image": "frame_0230_f5965.jpg",
+      "iou": 0.9465308057476567,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 445232,
+      "fp": 16864,
+      "fn": 8287,
+      "tn": 451217
+    },
+    {
+      "image": "frame_0231_f5991.jpg",
+      "iou": 0.9474882437957511,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444480,
+      "fp": 17448,
+      "fn": 7186,
+      "tn": 452486
+    },
+    {
+      "image": "frame_0232_f6017.jpg",
+      "iou": 0.9443053988803728,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 447851,
+      "fp": 17829,
+      "fn": 8585,
+      "tn": 447335
+    },
+    {
+      "image": "frame_0233_f6043.jpg",
+      "iou": 0.9403021088685224,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 440351,
+      "fp": 20369,
+      "fn": 7588,
+      "tn": 453292
+    },
+    {
+      "image": "frame_0234_f6069.jpg",
+      "iou": 0.9393426865942552,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 455414,
+      "fp": 16794,
+      "fn": 12614,
+      "tn": 436778
+    },
+    {
+      "image": "frame_0235_f6095.jpg",
+      "iou": 0.9500529819259629,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 442015,
+      "fp": 18345,
+      "fn": 4893,
+      "tn": 456347
+    },
+    {
+      "image": "frame_0236_f6121.jpg",
+      "iou": 0.9346856927221827,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 426026,
+      "fp": 23614,
+      "fn": 6156,
+      "tn": 465804
+    },
+    {
+      "image": "frame_0237_f6147.jpg",
+      "iou": 0.9441949346767408,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 438757,
+      "fp": 17795,
+      "fn": 8137,
+      "tn": 456911
+    },
+    {
+      "image": "frame_0238_f6172.jpg",
+      "iou": 0.9315158653179991,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 457147,
+      "fp": 16829,
+      "fn": 16780,
+      "tn": 430844
+    },
+    {
+      "image": "frame_0239_f6198.jpg",
+      "iou": 0.9426579961212131,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 468074,
+      "fp": 17950,
+      "fn": 10523,
+      "tn": 425053
+    },
+    {
+      "image": "frame_0240_f6224.jpg",
+      "iou": 0.9343852589649523,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 460238,
+      "fp": 16298,
+      "fn": 16021,
+      "tn": 429043
+    },
+    {
+      "image": "frame_0241_f6250.jpg",
+      "iou": 0.9483710213267602,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 460161,
+      "fp": 16999,
+      "fn": 8052,
+      "tn": 436388
+    },
+    {
+      "image": "frame_0242_f6276.jpg",
+      "iou": 0.9497284503622029,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 463061,
+      "fp": 16771,
+      "fn": 7740,
+      "tn": 434028
+    },
+    {
+      "image": "frame_0243_f6302.jpg",
+      "iou": 0.9545514126221571,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 458787,
+      "fp": 17829,
+      "fn": 4015,
+      "tn": 440969
+    },
+    {
+      "image": "frame_0244_f6328.jpg",
+      "iou": 0.9562912151638665,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 461728,
+      "fp": 16536,
+      "fn": 4568,
+      "tn": 438768
+    },
+    {
+      "image": "frame_0245_f6354.jpg",
+      "iou": 0.9542042663005269,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 461457,
+      "fp": 14487,
+      "fn": 7660,
+      "tn": 437996
+    },
+    {
+      "image": "frame_0246_f6380.jpg",
+      "iou": 0.9579645050256436,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 460050,
+      "fp": 11430,
+      "fn": 8757,
+      "tn": 441363
+    },
+    {
+      "image": "frame_0247_f6406.jpg",
+      "iou": 0.9510302321396437,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 465069,
+      "fp": 16363,
+      "fn": 7584,
+      "tn": 432584
+    },
+    {
+      "image": "frame_0248_f6432.jpg",
+      "iou": 0.9379238510745405,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 458339,
+      "fp": 16893,
+      "fn": 13442,
+      "tn": 432926
+    },
+    {
+      "image": "frame_0249_f6458.jpg",
+      "iou": 0.9084386799862099,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 445323,
+      "fp": 16173,
+      "fn": 28711,
+      "tn": 431393
+    },
+    {
+      "image": "frame_0250_f6484.jpg",
+      "iou": 0.9081983942433159,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 450322,
+      "fp": 14950,
+      "fn": 30569,
+      "tn": 425759
+    },
+    {
+      "image": "frame_0251_f6510.jpg",
+      "iou": 0.9150073623456326,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 425666,
+      "fp": 14350,
+      "fn": 25189,
+      "tn": 456395
+    },
+    {
+      "image": "frame_0252_f6536.jpg",
+      "iou": 0.9109694050015374,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 417715,
+      "fp": 14277,
+      "fn": 26547,
+      "tn": 463061
+    },
+    {
+      "image": "frame_0253_f6561.jpg",
+      "iou": 0.8464086866424834,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 384763,
+      "fp": 28029,
+      "fn": 41791,
+      "tn": 467017
+    },
+    {
+      "image": "frame_0254_f6587.jpg",
+      "iou": 0.8717850768430572,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 403939,
+      "fp": 16541,
+      "fn": 42867,
+      "tn": 458253
+    },
+    {
+      "image": "frame_0255_f6613.jpg",
+      "iou": 0.9215227731566605,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 429519,
+      "fp": 15537,
+      "fn": 21041,
+      "tn": 455503
+    },
+    {
+      "image": "frame_0256_f6639.jpg",
+      "iou": 0.864417568427753,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 400610,
+      "fp": 22406,
+      "fn": 40429,
+      "tn": 458155
+    },
+    {
+      "image": "frame_0257_f6665.jpg",
+      "iou": 0.9130260660976431,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444567,
+      "fp": 15113,
+      "fn": 27236,
+      "tn": 434684
+    },
+    {
+      "image": "frame_0258_f6691.jpg",
+      "iou": 0.9009653910982246,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 439381,
+      "fp": 18227,
+      "fn": 30070,
+      "tn": 433922
+    },
+    {
+      "image": "frame_0259_f6717.jpg",
+      "iou": 0.9107970509587262,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 443131,
+      "fp": 17749,
+      "fn": 25651,
+      "tn": 435069
+    },
+    {
+      "image": "frame_0260_f6743.jpg",
+      "iou": 0.910103099580514,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 441724,
+      "fp": 17388,
+      "fn": 26244,
+      "tn": 436244
+    },
+    {
+      "image": "frame_0261_f6769.jpg",
+      "iou": 0.9383340412087058,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 452901,
+      "fp": 13003,
+      "fn": 16761,
+      "tn": 438935
+    },
+    {
+      "image": "frame_0262_f6795.jpg",
+      "iou": 0.895670122649371,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 396609,
+      "fp": 24591,
+      "fn": 21607,
+      "tn": 478793
+    },
+    {
+      "image": "frame_0263_f6821.jpg",
+      "iou": 0.950211086540191,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 449027,
+      "fp": 18789,
+      "fn": 4739,
+      "tn": 449045
+    },
+    {
+      "image": "frame_0264_f6847.jpg",
+      "iou": 0.9457304980846059,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 460671,
+      "fp": 20841,
+      "fn": 5594,
+      "tn": 434494
+    },
+    {
+      "image": "frame_0265_f6873.jpg",
+      "iou": 0.9451935633129402,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459624,
+      "fp": 18504,
+      "fn": 8147,
+      "tn": 435325
+    },
+    {
+      "image": "frame_0266_f6899.jpg",
+      "iou": 0.9458152984844561,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 460194,
+      "fp": 19846,
+      "fn": 6518,
+      "tn": 435042
+    },
+    {
+      "image": "frame_0267_f6925.jpg",
+      "iou": 0.9446572291837262,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 464914,
+      "fp": 19294,
+      "fn": 7943,
+      "tn": 429449
+    },
+    {
+      "image": "frame_0268_f6950.jpg",
+      "iou": 0.944187826717565,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 468709,
+      "fp": 19803,
+      "fn": 7903,
+      "tn": 425185
+    },
+    {
+      "image": "frame_0269_f6976.jpg",
+      "iou": 0.9429100759424727,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 457037,
+      "fp": 19907,
+      "fn": 7765,
+      "tn": 436891
+    },
+    {
+      "image": "frame_0270_f7002.jpg",
+      "iou": 0.9405260224208395,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 437022,
+      "fp": 22930,
+      "fn": 4705,
+      "tn": 456943
+    },
+    {
+      "image": "frame_0271_f7028.jpg",
+      "iou": 0.9132461950351811,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 451287,
+      "fp": 19217,
+      "fn": 23653,
+      "tn": 427443
+    },
+    {
+      "image": "frame_0272_f7054.jpg",
+      "iou": 0.921926564896497,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 447812,
+      "fp": 19828,
+      "fn": 18095,
+      "tn": 435865
+    },
+    {
+      "image": "frame_0273_f7080.jpg",
+      "iou": 0.9258022095769983,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456202,
+      "fp": 19606,
+      "fn": 16956,
+      "tn": 428836
+    },
+    {
+      "image": "frame_0274_f7106.jpg",
+      "iou": 0.9429668982091125,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 458297,
+      "fp": 19903,
+      "fn": 7816,
+      "tn": 435584
+    },
+    {
+      "image": "frame_0275_f7132.jpg",
+      "iou": 0.9269259646772402,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 458021,
+      "fp": 20275,
+      "fn": 15833,
+      "tn": 427471
+    },
+    {
+      "image": "frame_0276_f7158.jpg",
+      "iou": 0.93030004779379,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459371,
+      "fp": 19237,
+      "fn": 15180,
+      "tn": 427812
+    },
+    {
+      "image": "frame_0277_f7184.jpg",
+      "iou": 0.9287235135746141,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 451889,
+      "fp": 21103,
+      "fn": 13578,
+      "tn": 435030
+    },
+    {
+      "image": "frame_0278_f7210.jpg",
+      "iou": 0.9218212072526968,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 449834,
+      "fp": 20390,
+      "fn": 17760,
+      "tn": 433616
+    },
+    {
+      "image": "frame_0279_f7236.jpg",
+      "iou": 0.9244021408462324,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448201,
+      "fp": 20519,
+      "fn": 16135,
+      "tn": 436745
+    },
+    {
+      "image": "frame_0280_f7262.jpg",
+      "iou": 0.9445781595859356,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459167,
+      "fp": 20593,
+      "fn": 6348,
+      "tn": 435492
+    },
+    {
+      "image": "frame_0281_f7288.jpg",
+      "iou": 0.9186214487170667,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 454036,
+      "fp": 18924,
+      "fn": 21298,
+      "tn": 427342
+    },
+    {
+      "image": "frame_0282_f7314.jpg",
+      "iou": 0.9175868602636459,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 452797,
+      "fp": 19107,
+      "fn": 21561,
+      "tn": 428135
+    },
+    {
+      "image": "frame_0283_f7339.jpg",
+      "iou": 0.9258525671945075,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 451080,
+      "fp": 19256,
+      "fn": 16869,
+      "tn": 434395
+    },
+    {
+      "image": "frame_0284_f7365.jpg",
+      "iou": 0.9375706023572731,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 457316,
+      "fp": 19148,
+      "fn": 11303,
+      "tn": 433833
+    },
+    {
+      "image": "frame_0285_f7391.jpg",
+      "iou": 0.9454308925929459,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 465845,
+      "fp": 20859,
+      "fn": 6029,
+      "tn": 428867
+    },
+    {
+      "image": "frame_0286_f7417.jpg",
+      "iou": 0.9289670177015557,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 454734,
+      "fp": 19882,
+      "fn": 14889,
+      "tn": 432095
+    },
+    {
+      "image": "frame_0287_f7443.jpg",
+      "iou": 0.9326125406398185,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 452941,
+      "fp": 19171,
+      "fn": 13557,
+      "tn": 435931
+    },
+    {
+      "image": "frame_0288_f7469.jpg",
+      "iou": 0.9047556137379948,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 451996,
+      "fp": 17252,
+      "fn": 30330,
+      "tn": 422022
+    },
+    {
+      "image": "frame_0289_f7495.jpg",
+      "iou": 0.9298455059007324,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 461871,
+      "fp": 19441,
+      "fn": 15406,
+      "tn": 424882
+    },
+    {
+      "image": "frame_0290_f7521.jpg",
+      "iou": 0.93888910473612,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459144,
+      "fp": 19784,
+      "fn": 10101,
+      "tn": 432571
+    },
+    {
+      "image": "frame_0291_f7547.jpg",
+      "iou": 0.9353099510103478,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 457635,
+      "fp": 19981,
+      "fn": 11671,
+      "tn": 432313
+    },
+    {
+      "image": "frame_0292_f7573.jpg",
+      "iou": 0.9303641381222001,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456472,
+      "fp": 19760,
+      "fn": 14406,
+      "tn": 430962
+    },
+    {
+      "image": "frame_0293_f7599.jpg",
+      "iou": 0.9202468645848941,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 454486,
+      "fp": 19562,
+      "fn": 19826,
+      "tn": 427726
+    },
+    {
+      "image": "frame_0294_f7625.jpg",
+      "iou": 0.9170873219563815,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 452379,
+      "fp": 19221,
+      "fn": 21678,
+      "tn": 428322
+    },
+    {
+      "image": "frame_0295_f7651.jpg",
+      "iou": 0.9435354735139474,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 465497,
+      "fp": 20183,
+      "fn": 7674,
+      "tn": 428246
+    },
+    {
+      "image": "frame_0296_f7677.jpg",
+      "iou": 0.938283718006576,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 465719,
+      "fp": 21929,
+      "fn": 8704,
+      "tn": 425248
+    },
+    {
+      "image": "frame_0297_f7703.jpg",
+      "iou": 0.9271800679501698,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 458472,
+      "fp": 20160,
+      "fn": 15848,
+      "tn": 427120
+    },
+    {
+      "image": "frame_0298_f7729.jpg",
+      "iou": 0.9383279318482179,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 453690,
+      "fp": 24214,
+      "fn": 5605,
+      "tn": 438091
+    },
+    {
+      "image": "frame_0299_f7754.jpg",
+      "iou": 0.9053568702443414,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 450712,
+      "fp": 19952,
+      "fn": 27164,
+      "tn": 423772
+    },
+    {
+      "image": "frame_0300_f7780.jpg",
+      "iou": 0.9362112666873136,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459485,
+      "fp": 20123,
+      "fn": 11184,
+      "tn": 430808
+    },
+    {
+      "image": "frame_0301_f7806.jpg",
+      "iou": 0.9331209150326797,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456856,
+      "fp": 19184,
+      "fn": 13560,
+      "tn": 432000
+    },
+    {
+      "image": "frame_0302_f7832.jpg",
+      "iou": 0.9359683199264163,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459947,
+      "fp": 19181,
+      "fn": 12285,
+      "tn": 430187
+    },
+    {
+      "image": "frame_0303_f7858.jpg",
+      "iou": 0.9228792138820255,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 454937,
+      "fp": 19431,
+      "fn": 18586,
+      "tn": 428646
+    },
+    {
+      "image": "frame_0304_f7884.jpg",
+      "iou": 0.936825422626788,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 461068,
+      "fp": 18972,
+      "fn": 12120,
+      "tn": 429440
+    },
+    {
+      "image": "frame_0305_f7910.jpg",
+      "iou": 0.9417038714723327,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 462354,
+      "fp": 20254,
+      "fn": 8368,
+      "tn": 430624
+    },
+    {
+      "image": "frame_0306_f7936.jpg",
+      "iou": 0.9429931625550062,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 458157,
+      "fp": 20923,
+      "fn": 6774,
+      "tn": 435746
+    },
+    {
+      "image": "frame_0307_f7962.jpg",
+      "iou": 0.9455125120554335,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 461759,
+      "fp": 19593,
+      "fn": 7017,
+      "tn": 433231
+    },
+    {
+      "image": "frame_0308_f7988.jpg",
+      "iou": 0.9269169412800637,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 486332,
+      "fp": 19388,
+      "fn": 18957,
+      "tn": 396923
+    },
+    {
+      "image": "frame_0309_f8014.jpg",
+      "iou": 0.9396436985740791,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 473011,
+      "fp": 20109,
+      "fn": 10274,
+      "tn": 418206
+    },
+    {
+      "image": "frame_0310_f8040.jpg",
+      "iou": 0.9396416469199104,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 464743,
+      "fp": 19401,
+      "fn": 10452,
+      "tn": 427004
+    },
+    {
+      "image": "frame_0311_f8066.jpg",
+      "iou": 0.9426651343556344,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 468366,
+      "fp": 19586,
+      "fn": 8901,
+      "tn": 424747
+    },
+    {
+      "image": "frame_0312_f8092.jpg",
+      "iou": 0.9454243397537229,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 469493,
+      "fp": 19587,
+      "fn": 7515,
+      "tn": 425005
+    },
+    {
+      "image": "frame_0313_f8118.jpg",
+      "iou": 0.9516128029767812,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459314,
+      "fp": 19174,
+      "fn": 4181,
+      "tn": 438931
+    },
+    {
+      "image": "frame_0314_f8143.jpg",
+      "iou": 0.9449557176321773,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 469145,
+      "fp": 19495,
+      "fn": 7833,
+      "tn": 425127
+    },
+    {
+      "image": "frame_0315_f8169.jpg",
+      "iou": 0.9477144176974799,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 461608,
+      "fp": 19144,
+      "fn": 6323,
+      "tn": 434525
+    },
+    {
+      "image": "frame_0316_f8195.jpg",
+      "iou": 0.9430923150510204,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 473206,
+      "fp": 19738,
+      "fn": 8816,
+      "tn": 419840
+    },
+    {
+      "image": "frame_0317_f8221.jpg",
+      "iou": 0.9521080171664029,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 467446,
+      "fp": 19410,
+      "fn": 4103,
+      "tn": 430641
+    },
+    {
+      "image": "frame_0318_f8247.jpg",
+      "iou": 0.9443766772383508,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 464520,
+      "fp": 19600,
+      "fn": 7760,
+      "tn": 429720
+    },
+    {
+      "image": "frame_0319_f8273.jpg",
+      "iou": 0.9497829364798267,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 469283,
+      "fp": 18973,
+      "fn": 5839,
+      "tn": 427505
+    },
+    {
+      "image": "frame_0320_f8299.jpg",
+      "iou": 0.9449904485474375,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 471434,
+      "fp": 19670,
+      "fn": 7773,
+      "tn": 422723
+    },
+    {
+      "image": "frame_0321_f8325.jpg",
+      "iou": 0.9353861402428136,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 466203,
+      "fp": 21629,
+      "fn": 10575,
+      "tn": 423193
+    },
+    {
+      "image": "frame_0322_f8351.jpg",
+      "iou": 0.9387325800717833,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 466337,
+      "fp": 24095,
+      "fn": 6341,
+      "tn": 424827
+    },
+    {
+      "image": "frame_0323_f8377.jpg",
+      "iou": 0.9409114848213173,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 468079,
+      "fp": 20289,
+      "fn": 9106,
+      "tn": 424126
+    },
+    {
+      "image": "frame_0324_f8403.jpg",
+      "iou": 0.9386597927615655,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459550,
+      "fp": 20306,
+      "fn": 9725,
+      "tn": 432019
+    },
+    {
+      "image": "frame_0325_f8429.jpg",
+      "iou": 0.9390496138237989,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 466271,
+      "fp": 19881,
+      "fn": 10383,
+      "tn": 425065
+    },
+    {
+      "image": "frame_0326_f8455.jpg",
+      "iou": 0.929860201005228,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 460477,
+      "fp": 19203,
+      "fn": 15531,
+      "tn": 426389
+    },
+    {
+      "image": "frame_0327_f8481.jpg",
+      "iou": 0.9168582637286664,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456203,
+      "fp": 19253,
+      "fn": 22116,
+      "tn": 424028
+    },
+    {
+      "image": "frame_0328_f8507.jpg",
+      "iou": 0.9390012295930169,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 462783,
+      "fp": 20857,
+      "fn": 9206,
+      "tn": 428754
+    },
+    {
+      "image": "frame_0329_f8532.jpg",
+      "iou": 0.9338329143895375,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 454348,
+      "fp": 20380,
+      "fn": 11813,
+      "tn": 435059
+    },
+    {
+      "image": "frame_0330_f8558.jpg",
+      "iou": 0.9241427549416015,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 463745,
+      "fp": 19279,
+      "fn": 18787,
+      "tn": 419789
+    },
+    {
+      "image": "frame_0331_f8584.jpg",
+      "iou": 0.9121740954255259,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 465352,
+      "fp": 19504,
+      "fn": 25301,
+      "tn": 411443
+    },
+    {
+      "image": "frame_0332_f8610.jpg",
+      "iou": 0.9196661274821931,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 465077,
+      "fp": 20763,
+      "fn": 19862,
+      "tn": 415898
+    },
+    {
+      "image": "frame_0333_f8636.jpg",
+      "iou": 0.9353856966005546,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 463174,
+      "fp": 20834,
+      "fn": 11161,
+      "tn": 426431
+    },
+    {
+      "image": "frame_0334_f8662.jpg",
+      "iou": 0.925967961928656,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 465035,
+      "fp": 20029,
+      "fn": 17151,
+      "tn": 419385
+    },
+    {
+      "image": "frame_0335_f8688.jpg",
+      "iou": 0.9380702177297112,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459191,
+      "fp": 19785,
+      "fn": 10530,
+      "tn": 432094
+    },
+    {
+      "image": "frame_0336_f8714.jpg",
+      "iou": 0.9338892421928089,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 471389,
+      "fp": 21859,
+      "fn": 11511,
+      "tn": 416841
+    },
+    {
+      "image": "frame_0337_f8740.jpg",
+      "iou": 0.9315245555709193,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 464841,
+      "fp": 21951,
+      "fn": 12219,
+      "tn": 422589
+    },
+    {
+      "image": "frame_0338_f8766.jpg",
+      "iou": 0.9220985425158882,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 440208,
+      "fp": 23368,
+      "fn": 13822,
+      "tn": 444202
+    },
+    {
+      "image": "frame_0339_f8792.jpg",
+      "iou": 0.9323868125553667,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 428373,
+      "fp": 20627,
+      "fn": 10437,
+      "tn": 462163
+    },
+    {
+      "image": "frame_0340_f8818.jpg",
+      "iou": 0.9105622432504241,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 445529,
+      "fp": 20711,
+      "fn": 23050,
+      "tn": 432310
+    },
+    {
+      "image": "frame_0341_f8844.jpg",
+      "iou": 0.9137774139582199,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459906,
+      "fp": 20030,
+      "fn": 23366,
+      "tn": 418298
+    },
+    {
+      "image": "frame_0342_f8870.jpg",
+      "iou": 0.8967685251136907,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 458281,
+      "fp": 19103,
+      "fn": 33652,
+      "tn": 410564
+    },
+    {
+      "image": "frame_0343_f8896.jpg",
+      "iou": 0.894825444849284,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456063,
+      "fp": 19121,
+      "fn": 34483,
+      "tn": 411933
+    },
+    {
+      "image": "frame_0344_f8922.jpg",
+      "iou": 0.9126571993782676,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 465039,
+      "fp": 19145,
+      "fn": 25360,
+      "tn": 412056
+    },
+    {
+      "image": "frame_0345_f8947.jpg",
+      "iou": 0.9263142631324199,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 453567,
+      "fp": 19169,
+      "fn": 16911,
+      "tn": 431953
+    },
+    {
+      "image": "frame_0346_f8973.jpg",
+      "iou": 0.9098699190930672,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 450735,
+      "fp": 18297,
+      "fn": 26352,
+      "tn": 426216
+    },
+    {
+      "image": "frame_0347_f8999.jpg",
+      "iou": 0.9126230960929602,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 438718,
+      "fp": 19834,
+      "fn": 22170,
+      "tn": 440878
+    },
+    {
+      "image": "frame_0348_f9025.jpg",
+      "iou": 0.9087833587295374,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 455056,
+      "fp": 19312,
+      "fn": 26363,
+      "tn": 420869
+    },
+    {
+      "image": "frame_0349_f9051.jpg",
+      "iou": 0.9072317149426941,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 454123,
+      "fp": 19237,
+      "fn": 27199,
+      "tn": 421041
+    },
+    {
+      "image": "frame_0350_f9077.jpg",
+      "iou": 0.9176302958260486,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 462404,
+      "fp": 19484,
+      "fn": 22023,
+      "tn": 417689
+    },
+    {
+      "image": "frame_0351_f9103.jpg",
+      "iou": 0.916052383540673,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 449986,
+      "fp": 19302,
+      "fn": 21935,
+      "tn": 430377
+    },
+    {
+      "image": "frame_0352_f9129.jpg",
+      "iou": 0.9113709758299068,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 454364,
+      "fp": 20692,
+      "fn": 23494,
+      "tn": 423050
+    },
+    {
+      "image": "frame_0353_f9155.jpg",
+      "iou": 0.9127248158801403,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 462014,
+      "fp": 21626,
+      "fn": 22552,
+      "tn": 415408
+    },
+    {
+      "image": "frame_0354_f9181.jpg",
+      "iou": 0.925438924013873,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 446143,
+      "fp": 22281,
+      "fn": 13664,
+      "tn": 439512
+    },
+    {
+      "image": "frame_0355_f9207.jpg",
+      "iou": 0.9176275333708008,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 452272,
+      "fp": 20424,
+      "fn": 20175,
+      "tn": 428729
+    },
+    {
+      "image": "frame_0356_f9233.jpg",
+      "iou": 0.9136105245425091,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 466400,
+      "fp": 21384,
+      "fn": 22718,
+      "tn": 411098
+    },
+    {
+      "image": "frame_0357_f9259.jpg",
+      "iou": 0.9179150765243638,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 464689,
+      "fp": 16111,
+      "fn": 25444,
+      "tn": 415356
+    },
+    {
+      "image": "frame_0358_f9285.jpg",
+      "iou": 0.9231651352279467,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 443567,
+      "fp": 19625,
+      "fn": 17293,
+      "tn": 441115
+    },
+    {
+      "image": "frame_0359_f9311.jpg",
+      "iou": 0.9143426375568509,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 451133,
+      "fp": 19259,
+      "fn": 23004,
+      "tn": 428204
+    },
+    {
+      "image": "frame_0360_f9336.jpg",
+      "iou": 0.9193173355399256,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 444398,
+      "fp": 20202,
+      "fn": 18800,
+      "tn": 438200
+    },
+    {
+      "image": "frame_0361_f9362.jpg",
+      "iou": 0.9142058970294411,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456186,
+      "fp": 19446,
+      "fn": 23365,
+      "tn": 422603
+    },
+    {
+      "image": "frame_0362_f9388.jpg",
+      "iou": 0.9280174162093257,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448444,
+      "fp": 20132,
+      "fn": 14652,
+      "tn": 438372
+    },
+    {
+      "image": "frame_0363_f9414.jpg",
+      "iou": 0.9201034579791767,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 461039,
+      "fp": 20841,
+      "fn": 19193,
+      "tn": 420527
+    },
+    {
+      "image": "frame_0364_f9440.jpg",
+      "iou": 0.9325978074035085,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 453582,
+      "fp": 18898,
+      "fn": 13884,
+      "tn": 435236
+    },
+    {
+      "image": "frame_0365_f9466.jpg",
+      "iou": 0.9182576753428026,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 451960,
+      "fp": 18032,
+      "fn": 22201,
+      "tn": 429407
+    },
+    {
+      "image": "frame_0366_f9492.jpg",
+      "iou": 0.9092975308520188,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 460882,
+      "fp": 16022,
+      "fn": 29951,
+      "tn": 414745
+    },
+    {
+      "image": "frame_0367_f9518.jpg",
+      "iou": 0.9249656203411949,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 447959,
+      "fp": 21289,
+      "fn": 15050,
+      "tn": 437302
+    },
+    {
+      "image": "frame_0368_f9544.jpg",
+      "iou": 0.9222236599353864,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 441889,
+      "fp": 15903,
+      "fn": 21364,
+      "tn": 442444
+    },
+    {
+      "image": "frame_0369_f9570.jpg",
+      "iou": 0.9163154382004585,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 448946,
+      "fp": 17934,
+      "fn": 23067,
+      "tn": 431653
+    },
+    {
+      "image": "frame_0370_f9596.jpg",
+      "iou": 0.9125797010123791,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 440254,
+      "fp": 16418,
+      "fn": 25756,
+      "tn": 439172
+    },
+    {
+      "image": "frame_0371_f9622.jpg",
+      "iou": 0.9284483646638941,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459672,
+      "fp": 17784,
+      "fn": 17641,
+      "tn": 426503
+    },
+    {
+      "image": "frame_0372_f9648.jpg",
+      "iou": 0.9285640086606363,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 455885,
+      "fp": 17459,
+      "fn": 17613,
+      "tn": 430643
+    },
+    {
+      "image": "frame_0373_f9674.jpg",
+      "iou": 0.9313886082331241,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 459997,
+      "fp": 16363,
+      "fn": 17523,
+      "tn": 427717
+    },
+    {
+      "image": "frame_0374_f9700.jpg",
+      "iou": 0.9303931889116663,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 453402,
+      "fp": 15694,
+      "fn": 18227,
+      "tn": 434277
+    },
+    {
+      "image": "frame_0375_f9725.jpg",
+      "iou": 0.9448209477210036,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 460347,
+      "fp": 16381,
+      "fn": 10504,
+      "tn": 434368
+    },
+    {
+      "image": "frame_0376_f9751.jpg",
+      "iou": 0.9406383935385135,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456061,
+      "fp": 16587,
+      "fn": 12194,
+      "tn": 436758
+    },
+    {
+      "image": "frame_0377_f9777.jpg",
+      "iou": 0.9387156779489668,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 464270,
+      "fp": 19346,
+      "fn": 10964,
+      "tn": 427020
+    },
+    {
+      "image": "frame_0378_f9803.jpg",
+      "iou": 0.8841511451815024,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 433204,
+      "fp": 52284,
+      "fn": 4478,
+      "tn": 431634
+    },
+    {
+      "image": "frame_0379_f9829.jpg",
+      "iou": 0.9475878535321802,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 467519,
+      "fp": 16401,
+      "fn": 9458,
+      "tn": 428222
+    },
+    {
+      "image": "frame_0380_f9855.jpg",
+      "iou": 0.9593158375236116,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 471804,
+      "fp": 10332,
+      "fn": 9677,
+      "tn": 429787
+    },
+    {
+      "image": "frame_0381_f9881.jpg",
+      "iou": 0.9429509731175161,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 471467,
+      "fp": 17733,
+      "fn": 10791,
+      "tn": 421609
+    },
+    {
+      "image": "frame_0382_f9907.jpg",
+      "iou": 0.9330715903238201,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 456537,
+      "fp": 20599,
+      "fn": 12148,
+      "tn": 432316
+    },
+    {
+      "image": "frame_0383_f9933.jpg",
+      "iou": 0.9386665622215477,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 479316,
+      "fp": 19196,
+      "fn": 12123,
+      "tn": 410965
+    },
+    {
+      "image": "frame_0384_f9959.jpg",
+      "iou": 0.9315258496792376,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 464075,
+      "fp": 16981,
+      "fn": 17132,
+      "tn": 423412
+    },
+    {
+      "image": "frame_0385_f9985.jpg",
+      "iou": 0.945150772082919,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 462915,
+      "fp": 13605,
+      "fn": 13259,
+      "tn": 431821
+    },
+    {
+      "image": "frame_0386_f10011.jpg",
+      "iou": 0.9442178163424221,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 457144,
+      "fp": 18568,
+      "fn": 8439,
+      "tn": 437449
+    },
+    {
+      "image": "frame_0387_f10037.jpg",
+      "iou": 0.9699078026293324,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 477183,
+      "fp": 3905,
+      "fn": 10900,
+      "tn": 429612
+    },
+    {
+      "image": "frame_0388_f10063.jpg",
+      "iou": 0.9672863778961237,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 472058,
+      "fp": 4926,
+      "fn": 11039,
+      "tn": 433577
+    },
+    {
+      "image": "frame_0389_f10089.jpg",
+      "iou": 0.9649295688262834,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 471976,
+      "fp": 6552,
+      "fn": 10602,
+      "tn": 432470
+    },
+    {
+      "image": "frame_0390_f10115.jpg",
+      "iou": 0.9699851676306326,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 468239,
+      "fp": 4073,
+      "fn": 10416,
+      "tn": 438872
+    },
+    {
+      "image": "frame_0391_f10140.jpg",
+      "iou": 0.9718438292060689,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 468937,
+      "fp": 3927,
+      "fn": 9659,
+      "tn": 439077
+    },
+    {
+      "image": "frame_0392_f10166.jpg",
+      "iou": 0.9658599088838269,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 474894,
+      "fp": 3034,
+      "fn": 13752,
+      "tn": 429920
+    },
+    {
+      "image": "frame_0393_f10192.jpg",
+      "iou": 0.9712788360195327,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 467223,
+      "fp": 3809,
+      "fn": 10007,
+      "tn": 440561
+    },
+    {
+      "image": "frame_0394_f10218.jpg",
+      "iou": 0.9676809247241129,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 476848,
+      "fp": 5256,
+      "fn": 10670,
+      "tn": 428826
+    },
+    {
+      "image": "frame_0395_f10244.jpg",
+      "iou": 0.9706285892685492,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 472568,
+      "fp": 3752,
+      "fn": 10548,
+      "tn": 434732
+    },
+    {
+      "image": "frame_0396_f10270.jpg",
+      "iou": 0.9733221684654509,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 470757,
+      "fp": 3483,
+      "fn": 9420,
+      "tn": 437940
+    },
+    {
+      "image": "frame_0397_f10296.jpg",
+      "iou": 0.9749010060535644,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 474924,
+      "fp": 3228,
+      "fn": 8999,
+      "tn": 434449
+    },
+    {
+      "image": "frame_0398_f10322.jpg",
+      "iou": 0.9754246674266797,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 480859,
+      "fp": 2869,
+      "fn": 9246,
+      "tn": 428626
+    },
+    {
+      "image": "frame_0399_f10348.jpg",
+      "iou": 0.9794764029357874,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 473092,
+      "fp": 3540,
+      "fn": 6373,
+      "tn": 438595
+    },
+    {
+      "image": "frame_0400_f10374.jpg",
+      "iou": 0.9806798357972731,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 472773,
+      "fp": 3867,
+      "fn": 5447,
+      "tn": 439513
+    },
+    {
+      "image": "frame_0401_f10400.jpg",
+      "iou": 0.9800091638807338,
+      "positive_ground_truth": true,
+      "detected": true,
+      "tp": 461992,
+      "fp": 3512,
+      "fn": 5912,
+      "tn": 450184
+    }
+  ]
+}

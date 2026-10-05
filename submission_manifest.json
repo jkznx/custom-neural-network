@@ -1,0 +1,138 @@
+{
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 98,
+      "sha256": "85f8a523f3ba871c9685e142a77f5c4da8adc850b7633a3b42935be602bc23ea"
+    },
+    {
+      "path": "common.py",
+      "bytes": 1449,
+      "sha256": "feeb2458c9307f31a34935318e91de7d25fab93f7d0808373e867e6340a4f0c7"
+    },
+    {
+      "path": "custom-unet-architecture.md",
+      "bytes": 1193,
+      "sha256": "6392f431dcf7ee95c5de3881540c086ab30b0896af7b0c56ea52e0ecbed00c35"
+    },
+    {
+      "path": "dataset.py",
+      "bytes": 3785,
+      "sha256": "4d303a80c68b978b06e10587a35c007dd4c328059ab5f885ea58d525cb7127fc"
+    },
+    {
+      "path": "dataset_manifest.json",
+      "bytes": 578045,
+      "sha256": "57132bb60b7c66f887d62ca50022f05b51a561cdc4bb101597b5b4a8ed0f31da"
+    },
+    {
+      "path": "evaluate.py",
+      "bytes": 2945,
+      "sha256": "f2a38a828728c7acac1fc78f69bfb6f004c41bfdf59c6f8224fac7e4477abf84"
+    },
+    {
+      "path": "inference.py",
+      "bytes": 6024,
+      "sha256": "49326783a10f15ad39796df1a356d4e37a863ff28ac541c9e62f77c0c4613b64"
+    },
+    {
+      "path": "model.py",
+      "bytes": 2232,
+      "sha256": "51e9e172d78c5e9befc489e1e8261ae63f7b37d5648ca26493d8fc5da47d0e21"
+    },
+    {
+      "path": "prepare_data.py",
+      "bytes": 6589,
+      "sha256": "2b8ba5a53bfd08024361ff27d81a2d0f45644134b2e7223f3ceed0519fb7c4cc"
+    },
+    {
+      "path": "README.md",
+      "bytes": 17685,
+      "sha256": "9d0b3cb4186eb14dd5fb12e934d10d8d48f097d5b1aa8786d321605123c68619"
+    },
+    {
+      "path": "report.py",
+      "bytes": 4940,
+      "sha256": "411513488973eb3468c2ae55d7463a2736da9d154c4accf03478b87192fd6641"
+    },
+    {
+      "path": "requirements-lock.txt",
+      "bytes": 534,
+      "sha256": "7cda2192ec7b9b9c632f9935171eedf2d903fb2e4a2292ce59c598a5d007043f"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 99,
+      "sha256": "f5d4b232317480f8adde9fd1d976db77948c6308d2246f96b09de2437f2f7d8b"
+    },
+    {
+      "path": "run/test/memory.json",
+      "bytes": 1091,
+      "sha256": "1e4c210e80e023e98191da975c0be976ade7af9069f0f94b1be6eb4deac0128b"
+    },
+    {
+      "path": "run/test/metrics.json",
+      "bytes": 93668,
+      "sha256": "2aa5aa99f6f2deded7e82608843d7d38852dc80eb49364a735534aba66dcc277"
+    },
+    {
+      "path": "run/test/predictions.json",
+      "bytes": 11682,
+      "sha256": "a474503bb4cd6d450d6a7077ff5a58d9333094e7183108af1b35e9c9d19d8a02"
+    },
+    {
+      "path": "run/test/snapshot.png",
+      "bytes": 528349,
+      "sha256": "dea36fa0ccfd2ff3d48700fd74805b99f0b8bf7a9896a96a9547fd0c2b4d5b8f"
+    },
+    {
+      "path": "runs/lane/best.pt",
+      "bytes": 926833,
+      "sha256": "41f540d719be9d473b5b18f7e3235107a13fb0999de2e781185114cbb8f1a002"
+    },
+    {
+      "path": "runs/lane/config.json",
+      "bytes": 206,
+      "sha256": "89cc164bd78543093966686a445b3dba9b27bdf7e3ae8eb765a8049f57762aed"
+    },
+    {
+      "path": "runs/lane/environment.json",
+      "bytes": 98,
+      "sha256": "f1ccc33a70404358a0f0961578c23c30eb9f0d7b1848eeccb6dc6814c6140195"
+    },
+    {
+      "path": "runs/lane/history.csv",
+      "bytes": 3086,
+      "sha256": "9ea2ca851a556fd6b92a29c46538f9c3a99da350f213b7ac92cdb2a58980a136"
+    },
+    {
+      "path": "runs/lane/loss.png",
+      "bytes": 83113,
+      "sha256": "03d55c5578b68d7231158317d87b1d0bf14eb9aa7629003a3a8f3ae7bfa60c60"
+    },
+    {
+      "path": "runs/lane/RESULTS.md",
+      "bytes": 2556,
+      "sha256": "d7f5f1c32ce68ffed87341e457949618d20a0c84b3e0b03d1aece231b1d4c4a9"
+    },
+    {
+      "path": "runs/lane/split_manifest.json",
+      "bytes": 106599,
+      "sha256": "cefb7d8e1107fafacd06ee92fc858965b8258f397edae4a02e6e68e22d767e76"
+    },
+    {
+      "path": "tests/test_pipeline.py",
+      "bytes": 1789,
+      "sha256": "2b982e7ce1b3a33267b04639dc19b862db1049bbf498be32932cf7b616af077c"
+    },
+    {
+      "path": "train.py",
+      "bytes": 4817,
+      "sha256": "dd920d193c8dfe957ab5cd5646f6b4d373c58b0e974d33b592801b00c2814779"
+    }
+  ],
+  "training_epochs": 30,
+  "checkpoint_epoch": 20,
+  "test_images": 400,
+  "contents": "Source, tests, checkpoint, plots, snapshot, metrics, memory, logs and dataset audit. Dataset images and all prediction masks remain in the local working directory."
+}
